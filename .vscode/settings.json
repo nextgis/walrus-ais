@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": false,
+  "tslint.enable": false,
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnPaste": false,
+  "git.ignoreLimitWarning": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+  ]
+}

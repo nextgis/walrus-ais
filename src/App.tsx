@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
+import { MapContainer } from './Map';
+
 function App() {
+  const [showMap, setShowMap] = useState(false);
+
+  const onShowMapClick = () => {
+    setShowMap(!showMap);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={onShowMapClick}>ShowMap</button>
+      {showMap && (
+        <MapContainer
+          id="map"
+          qmsId={448}
+          center={[104, 52]}
+          zoom={3}
+          baseUrl="https://demo.nextgis.com"
+          resources={[{ resource: 4117, fit: true }]}
+        />
+      )}
     </div>
   );
 }
