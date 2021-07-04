@@ -1,27 +1,18 @@
 import { useState } from 'react';
-import './App.css';
+import './App.sass';
 
-import { MapContainer } from './Map';
+import { MapContainer } from './components/Map';
+import { LoginContainer } from './components/Login';
 
 function App() {
   const [showMap, setShowMap] = useState(false);
 
-  const onShowMapClick = () => {
-    setShowMap(!showMap);
-  };
-
   return (
     <div className="App">
-      <button onClick={onShowMapClick}>ShowMap</button>
-      {showMap && (
-        <MapContainer
-          id="map"
-          qmsId={448}
-          center={[104, 52]}
-          zoom={3}
-          baseUrl="https://demo.nextgis.com"
-          resources={[{ resource: 4117, fit: true }]}
-        />
+      {showMap ? (
+        <MapContainer id="map" qmsId={448} center={[104, 52]} zoom={3} />
+      ) : (
+        <LoginContainer onLogin={() => setShowMap(true)}></LoginContainer>
       )}
     </div>
   );

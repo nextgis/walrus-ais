@@ -10,6 +10,7 @@ import {
 } from 'react';
 
 import type { NgwMapOptions } from '@nextgis/ngw-map';
+import connector from '../servises/connector';
 
 export interface MapContainerProps extends NgwMapOptions {
   children?: ReactNode;
@@ -28,7 +29,11 @@ export function useMapElement(
 
   useEffect(() => {
     if (mapRef.current !== null && map === null) {
-      const ngwMap = new NgwMap({ target: mapRef.current, ...props });
+      const ngwMap = new NgwMap({
+        target: mapRef.current,
+        connector,
+        ...props,
+      });
       if (props.center !== null && props.zoom !== null) {
         ngwMap.setView(props.center, props.zoom);
       }
