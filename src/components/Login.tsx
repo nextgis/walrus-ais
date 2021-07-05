@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import {
   Notification,
   Container,
+  Progress,
   Columns,
   Heading,
   Button,
@@ -18,6 +19,15 @@ interface LoginComponentProps {
   onLogin: () => void;
 }
 
+interface LoginFormProps {
+  login: string;
+  setLogin: (val: string) => void;
+  password: string;
+  setPassword: (val: string) => void;
+  rmbrLogin: boolean;
+  setRmbrLogin: (val: boolean) => void;
+}
+
 interface ShowErrorProps {
   message: string;
 }
@@ -26,30 +36,93 @@ function ShowError<Props extends ShowErrorProps = ShowErrorProps>(
   props: Props,
 ) {
   return (
-    <Block style={{ paddingBottom: '1rem' }}>
+    <Block style={{ padding: '1rem 0', lineHeight: '0' }}>
       <Notification color="danger">{props.message}</Notification>
     </Block>
+  );
+}
+
+function LoginForm<Props extends LoginFormProps = LoginFormProps>({
+  login,
+  setLogin,
+  password,
+  setPassword,
+  rmbrLogin,
+  setRmbrLogin,
+}: Props) {
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
+      <Form.Field>
+        <Form.Label>Логин</Form.Label>
+        <Form.Control>
+          <Form.Input
+            type="login"
+            value={login}
+            onChange={(e) => setLogin(e.target.value)}
+            placeholder="Пользователь NextGIS Web"
+          />
+        </Form.Control>
+      </Form.Field>
+      <Form.Field>
+        <Form.Label>Пароль</Form.Label>
+        <Form.Control>
+          <Form.Input
+            type="password"
+            placeholder="*************"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Control>
+      </Form.Field>
+      <Form.Field>
+        <Form.Control>
+          <Form.Checkbox
+            checked={!rmbrLogin}
+            onChange={(e) => setRmbrLogin(!e.target.checked)}
+          >
+            Не запоминать логин и пароль
+          </Form.Checkbox>
+        </Form.Control>
+      </Form.Field>
+    </form>
   );
 }
 
 export function LoginContainer<
   Props extends LoginComponentProps = LoginComponentProps,
 >({ onLogin }: Props) {
+  const [cookies, setCookies] = useCookies([RMBR_KEY]);
+  const getFromMem = () => cookies[RMBR_KEY];
+  let initLogin = '';
+  let initPassword = '';
+  const fromMem = getFromMem();
+  if (fromMem) {
+    initLogin = fromMem.login;
+    initPassword = fromMem.password;
+  }
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [valid, setValid] = useState(false);
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const [login, setLogin] = useState(initLogin);
+  const [password, setPassword] = useState(initPassword);
   const [rmbrLogin, setRmbrLogin] = useState(true);
-  const [cookies, setCookies] = useCookies([RMBR_KEY]);
+
+  const valid = () => !!(login && password);
 
   useEffect(() => {
-    setError('');
-    setValid(!!(login && password));
-  }, [login, password]);
-  const auth = { login, password };
-  const onLoginClick = () => {
+    if (valid()) {
+      makeLogin();
+    }
+  }, []);
+
+  function makeLogin() {
     setLoading(true);
+    const auth = { login, password };
+    console.log(auth);
     connector
       .login(auth)
       .then(() => {
@@ -60,9 +133,18 @@ export function LoginContainer<
       })
       .catch(() => {
         setError('Ошибка входа');
-        setValid(false);
+        setCookies(RMBR_KEY, '');
         setLoading(false);
       });
+  }
+
+  const formProps = {
+    login,
+    setLogin,
+    password,
+    setPassword,
+    rmbrLogin,
+    setRmbrLogin,
   };
 
   return (
@@ -76,54 +158,23 @@ export function LoginContainer<
               widescreen={{ size: 3 }}
             >
               <Heading>Warlus AIS</Heading>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                }}
-              >
-                <Form.Field>
-                  <Form.Label>Логин</Form.Label>
-                  <Form.Control>
-                    <Form.Input
-                      type="login"
-                      value={login}
-                      onChange={(e) => setLogin(e.target.value)}
-                      placeholder="Пользователь NextGIS Web"
-                    />
-                  </Form.Control>
-                </Form.Field>
-                <Form.Field>
-                  <Form.Label>Пароль</Form.Label>
-                  <Form.Control>
-                    <Form.Input
-                      type="password"
-                      placeholder="*************"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </Form.Control>
-                </Form.Field>
-                <Form.Field>
-                  <Form.Control>
-                    <Form.Checkbox
-                      checked={!rmbrLogin}
-                      onChange={(e) => setRmbrLogin(!e.target.checked)}
+              {getFromMem() ? (
+                <Progress />
+              ) : (
+                <>
+                  <LoginForm {...formProps}></LoginForm>
+                  {error && <ShowError message={error}></ShowError>}
+                  <Button.Group align="right" style={{ paddingTop: '.5rem' }}>
+                    <Button
+                      disabled={!valid()}
+                      onClick={makeLogin}
+                      loading={loading}
                     >
-                      Не запоминать логин и пароль
-                    </Form.Checkbox>
-                  </Form.Control>
-                </Form.Field>
-                {error && <ShowError message={error}></ShowError>}
-                <Button.Group align="right">
-                  <Button
-                    disabled={!valid}
-                    onClick={onLoginClick}
-                    loading={loading}
-                  >
-                    Войти
-                  </Button>
-                </Button.Group>
-              </form>
+                      Войти
+                    </Button>
+                  </Button.Group>
+                </>
+              )}
             </Columns.Column>
           </Columns>
         </Container>
