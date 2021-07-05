@@ -26,6 +26,7 @@ interface LoginFormProps {
   setPassword: (val: string) => void;
   rmbrLogin: boolean;
   setRmbrLogin: (val: boolean) => void;
+  onEnterKeyDown: () => void;
 }
 
 interface ShowErrorProps {
@@ -49,7 +50,13 @@ function LoginForm<Props extends LoginFormProps = LoginFormProps>({
   setPassword,
   rmbrLogin,
   setRmbrLogin,
+  onEnterKeyDown,
 }: Props) {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      onEnterKeyDown();
+    }
+  };
   return (
     <form
       onSubmit={(e) => {
@@ -64,6 +71,7 @@ function LoginForm<Props extends LoginFormProps = LoginFormProps>({
             value={login}
             onChange={(e) => setLogin(e.target.value)}
             placeholder="Пользователь NextGIS Web"
+            onKeyDown={handleKeyDown}
           />
         </Form.Control>
       </Form.Field>
@@ -75,6 +83,7 @@ function LoginForm<Props extends LoginFormProps = LoginFormProps>({
             placeholder="*************"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
         </Form.Control>
       </Form.Field>
@@ -161,7 +170,10 @@ export function LoginContainer<
                 <Progress />
               ) : (
                 <>
-                  <LoginForm {...formProps}></LoginForm>
+                  <LoginForm
+                    {...formProps}
+                    onEnterKeyDown={makeLogin}
+                  ></LoginForm>
                   {error && <ShowError message={error}></ShowError>}
                   <Button.Group align="right" style={{ paddingTop: '.5rem' }}>
                     <Button
