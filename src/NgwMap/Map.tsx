@@ -7,10 +7,12 @@ import {
   useEffect,
   useState,
   useRef,
+  useMemo,
 } from 'react';
 
 import type { NgwMapOptions } from '@nextgis/ngw-map';
 import connector from '../servises/connector';
+import { CONTEXT_VERSION, NgwMapProvider } from './context';
 
 export interface MapContainerProps extends NgwMapOptions {
   children?: ReactNode;
@@ -25,10 +27,10 @@ export function useMapElement(
   mapRef: MutableRefObject<HTMLElement | null>,
   props: MapContainerProps,
 ): NgwMap | null {
-  const [map, setMap] = useState<NgwMap | null>(null);
+  const [ngwMap, setNgwMap] = useState<NgwMap | null>(null);
 
   useEffect(() => {
-    if (mapRef.current !== null && map === null) {
+    if (mapRef.current !== null && ngwMap === null) {
       const ngwMap = new NgwMap({
         target: mapRef.current,
         connector,
@@ -37,33 +39,61 @@ export function useMapElement(
       if (props.center !== null && props.zoom !== null) {
         ngwMap.setView(props.center, props.zoom);
       }
-      setMap(ngwMap);
+      setNgwMap(ngwMap);
     }
-  }, [mapRef, map, props]);
+  }, [mapRef, ngwMap, props]);
 
-  return map;
+  return ngwMap;
 }
 
 export function MapContainer<
   Props extends MapContainerProps = MapContainerProps,
->({ className, id, style, whenCreated, ...options }: Props) {
+>({
+  whenCreated,
+  placeholder,
+  className,
+  children,
+  style,
+  id,
+  ...options
+}: Props) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const map = useMapElement(mapRef, options);
+  const ngwMap = useMapElement(mapRef, options);
 
   const createdRef = useRef<boolean>(false);
   useEffect(() => {
-    if (whenCreated && map !== null && createdRef.current === false) {
+    if (whenCreated && ngwMap !== null && createdRef.current === false) {
       createdRef.current = true;
-      map.onLoad().then(() => {
-        whenCreated(map);
+      ngwMap.onLoad().then(() => {
+        whenCreated(ngwMap);
       });
     }
+  }, [ngwMap, [whenCreated]]);
+
+  // on unmount
+  useEffect(() => {
     return () => {
-      map && map.destroy();
+      if (ngwMap) {
+        ngwMap.destroy();
+      }
     };
-  }, [map, [whenCreated]]);
+  }, []);
 
   const [props] = useState({ className, id, style });
+  const context = useMemo(
+    () => (ngwMap ? { __version: CONTEXT_VERSION, ngwMap } : null),
+    [ngwMap],
+  );
 
-  return <div id="map" {...props} ref={mapRef}></div>;
+  const contents = context ? (
+    <NgwMapProvider value={context}>{children}</NgwMapProvider>
+  ) : (
+    placeholder ?? null
+  );
+
+  return (
+    <div id="map" {...props} ref={mapRef}>
+      {contents}
+    </div>
+  );
 }

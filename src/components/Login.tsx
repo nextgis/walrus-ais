@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
+
 import {
   Notification,
   Container,
@@ -11,9 +11,9 @@ import {
   Form,
   Hero,
 } from 'react-bulma-components';
+import { useCookies } from 'react-cookie';
+import { RMBR_KEY } from '../constants';
 import connector from '../servises/connector';
-
-const RMBR_KEY = 'ngw-login';
 
 interface LoginComponentProps {
   onLogin: () => void;
@@ -122,7 +122,6 @@ export function LoginContainer<
   function makeLogin() {
     setLoading(true);
     const auth = { login, password };
-    console.log(auth);
     connector
       .login(auth)
       .then(() => {
