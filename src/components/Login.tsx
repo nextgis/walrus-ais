@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import Logo from '../images/warlus-logo-detail.svg';
+import Logo from '../images/walrus-logo-detail.svg';
 
 import {
   Notification,
@@ -177,7 +177,7 @@ export function LoginContainer<
               >
                 <img src={Logo} style={{ height: '120px' }} />
               </div>
-              <Heading>Warlus AIS</Heading>
+              <Heading>Walrus AIS</Heading>
               {getFromMem() ? (
                 <Progress />
               ) : (
