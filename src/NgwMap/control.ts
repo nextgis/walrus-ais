@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { ControlOptions } from '@nextgis/webmap';
-
 import { useNgwMapContext } from './context';
+
+import type { ControlOptions } from '@nextgis/webmap';
 import type { ElementHook } from './element';
 
 export function createControlHook<E extends any, P extends ControlOptions>(

@@ -13,9 +13,8 @@ export const LogoutMapBtnControl = createControlComponent<
   any,
   LogoutMapBtnControlProps
 >(function createLogoutMapControl(props, context) {
-  const control = context.ngwMap.createButtonControl({
+  return context.ngwMap.createButtonControl({
     onClick: props.onClick,
     html: '<span class="iconify map-btn-icon" data-icon="mdi:log-out"></span>',
   });
-  return control;
 });
