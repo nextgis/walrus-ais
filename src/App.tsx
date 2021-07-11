@@ -3,11 +3,10 @@ import './App.sass';
 import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 
-import { MapContainer } from './NgwMap/Map';
 import { LoginContainer } from './components/Login';
 import { RMBR_KEY } from './constants';
-import { LogoutMapBtnControl } from './components/LogoutMapBtnControl';
 import { useEffect } from 'react';
+import { WalrusMap } from './components/WalrusMap';
 
 function App() {
   const [showMap, setShowMap] = useState(false);
@@ -25,9 +24,7 @@ function App() {
   return (
     <div className="App">
       {showMap ? (
-        <MapContainer id="map" qmsId={448} center={[104, 52]} zoom={3}>
-          <LogoutMapBtnControl onClick={logout} />
-        </MapContainer>
+        <WalrusMap onLogout={logout}></WalrusMap>
       ) : (
         <LoginContainer onLogin={() => setShowMap(true)}></LoginContainer>
       )}

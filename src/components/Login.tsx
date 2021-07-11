@@ -15,7 +15,7 @@ import {
 } from 'react-bulma-components';
 import { useCookies } from 'react-cookie';
 import { RMBR_KEY } from '../constants';
-import connector from '../servises/connector';
+import connector from '../services/connector';
 
 interface LoginComponentProps {
   onLogin: () => void;

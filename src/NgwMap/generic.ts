@@ -1,8 +1,10 @@
-import { ControlOptions } from '@nextgis/webmap';
 import { createWebMapComponent } from './component';
-import { NgwMapContextInterface } from './context';
 import { createControlHook } from './control';
-import { createElementHook, NgwMapElement } from './element';
+import { createElementHook } from './element';
+
+import type { ControlOptions } from '@nextgis/webmap';
+import type { NgwMapElement } from './element';
+import type { NgwMapContextInterface } from './context';
 
 export function createControlComponent<E extends any, P extends ControlOptions>(
   createInstance: (props: P, context: NgwMapContextInterface) => E,

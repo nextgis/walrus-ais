@@ -1,4 +1,5 @@
 import NgwMap from '@nextgis/ngw-leaflet';
+// import NgwMap from '@nextgis/ngw-ol';
 
 import {
   CSSProperties,
@@ -10,9 +11,10 @@ import {
   useMemo,
 } from 'react';
 
-import type { NgwMapOptions } from '@nextgis/ngw-map';
-import connector from '../servises/connector';
+import connector from '../services/connector';
 import { CONTEXT_VERSION, NgwMapProvider } from './context';
+
+import type { NgwMapOptions } from '@nextgis/ngw-map';
 
 export interface MapContainerProps extends NgwMapOptions {
   children?: ReactNode;
