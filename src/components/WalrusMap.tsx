@@ -40,7 +40,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
             });
           }
         }
-        items.sort((a, b) => (dateStr(b) > dateStr(a) ? 1 : -1));
+        items.sort((a, b) => (dateStr(b) > dateStr(a) ? -1 : 1));
         setAcitveAisLayerItem(items[0]);
         setAisLayerItems(items);
       });
@@ -52,11 +52,12 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   useEffect(() => {
     if (ngwMap && acitveAisLayerItem) {
       ngwMap.removeLayer('ais-layer');
+      console.log(1234);
       ngwMap.addNgwLayer({
         id: 'ais-layer',
         resource: acitveAisLayerItem.resource,
         fit: true,
-        // adapter: 'IMAGE',
+        adapter: 'IMAGE',
       });
     }
   }, [acitveAisLayerItem, ngwMap]);
