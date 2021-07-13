@@ -8,6 +8,7 @@ import { PanelMapControl } from './PanelMapControl';
 
 import type { NgwMap } from '@nextgis/ngw-map';
 import type { AisLayerItem, DateDict } from '../interfaces';
+import { MapLoadingControl } from './MapLoadingControl';
 
 interface WalrusMapProps {
   onLogout: () => void;
@@ -16,6 +17,7 @@ interface WalrusMapProps {
 export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   props: Props,
 ) {
+  const [aisLayerLoading, setAisLayerLoading] = useState(false);
   const [aisLayerItems, setAisLayerItems] = useState<AisLayerItem[]>([]);
   const [acitveAisLayerItem, setAcitveAisLayerItem] =
     useState<AisLayerItem | null>(null);
@@ -40,7 +42,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
             });
           }
         }
-        items.sort((a, b) => (dateStr(b) > dateStr(a) ? -1 : 1));
+        items.sort((a, b) => (dateStr(b) > dateStr(a) ? 1 : -1));
         setAcitveAisLayerItem(items[0]);
         setAisLayerItems(items);
       });
@@ -52,13 +54,27 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   useEffect(() => {
     if (ngwMap && acitveAisLayerItem) {
       ngwMap.removeLayer('ais-layer');
-      console.log(1234);
-      ngwMap.addNgwLayer({
-        id: 'ais-layer',
-        resource: acitveAisLayerItem.resource,
-        fit: true,
-        adapter: 'IMAGE',
-      });
+      setAisLayerLoading(true);
+      ngwMap
+        .addNgwLayer({
+          id: 'ais-layer',
+          resource: acitveAisLayerItem.resource,
+          fit: true,
+          adapterOptions: {
+            waitFullLoad: true,
+            paint: {
+              color: 'blue',
+              stroke: true,
+              strokeColor: 'white',
+              opacity: 1,
+              radius: 4,
+            },
+          },
+          // adapter: 'IMAGE',
+        })
+        .finally(() => {
+          setAisLayerLoading(false);
+        });
     }
   }, [acitveAisLayerItem, ngwMap]);
 
@@ -69,9 +85,8 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   return (
     <MapContainer
       id="map"
-      qmsId={448}
-      center={[104, 52]}
-      zoom={3}
+      osm
+      bounds={[41.3607, 67.9801, 66.5899, 70.6804]}
       whenCreated={setupMapLayers}
     >
       <LogoutMapBtnControl onClick={logout} />
@@ -80,6 +95,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
         acitveAisLayerItem={acitveAisLayerItem}
         onChange={setAcitveAisLayerItem}
       />
+      <MapLoadingControl loading={aisLayerLoading} />
     </MapContainer>
   );
 }

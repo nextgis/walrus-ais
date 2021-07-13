@@ -1,5 +1,6 @@
-import NgwMap from '@nextgis/ngw-leaflet';
+// import NgwMap from '@nextgis/ngw-leaflet';
 // import NgwMap from '@nextgis/ngw-ol';
+import NgwMap from '@nextgis/ngw-mapbox';
 
 import {
   CSSProperties,

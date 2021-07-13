@@ -98,7 +98,7 @@ export function PanelMapControl<
           {props.acitveAisLayerItem ? (
             <DateFilter {...props} onChange={props.onChange}></DateFilter>
           ) : (
-            'Загрузка данных...'
+            'Загрузка списка слоёв...'
           )}
         </Hero.Body>
       </Hero>
