@@ -19,7 +19,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
 ) {
   const [aisLayerLoading, setAisLayerLoading] = useState(false);
   const [aisLayerItems, setAisLayerItems] = useState<AisLayerItem[]>([]);
-  const [acitveAisLayerItem, setAcitveAisLayerItem] =
+  const [activeAisLayerItem, setActiveAisLayerItem] =
     useState<AisLayerItem | null>(null);
   const [ngwMap, setNgwMap] = useState<NgwMap | null>(null);
   const logout = () => props.onLogout();
@@ -43,7 +43,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
           }
         }
         items.sort((a, b) => (dateStr(b) > dateStr(a) ? 1 : -1));
-        setAcitveAisLayerItem(items[0]);
+        setActiveAisLayerItem(items[0]);
         setAisLayerItems(items);
       });
     return () => {
@@ -52,14 +52,13 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   }, []);
 
   useEffect(() => {
-    if (ngwMap && acitveAisLayerItem) {
+    if (ngwMap && activeAisLayerItem) {
       ngwMap.removeLayer('ais-layer');
       setAisLayerLoading(true);
       ngwMap
         .addNgwLayer({
           id: 'ais-layer',
-          resource: acitveAisLayerItem.resource,
-          fit: true,
+          resource: activeAisLayerItem.resource,
           adapterOptions: {
             waitFullLoad: true,
             paint: {
@@ -76,7 +75,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
           setAisLayerLoading(false);
         });
     }
-  }, [acitveAisLayerItem, ngwMap]);
+  }, [activeAisLayerItem, ngwMap]);
 
   const setupMapLayers = (ngwMap: NgwMap) => {
     setNgwMap(ngwMap);
@@ -85,15 +84,15 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   return (
     <MapContainer
       id="map"
-      osm
+      qmsId={448}
       bounds={[41.3607, 67.9801, 66.5899, 70.6804]}
       whenCreated={setupMapLayers}
     >
       <LogoutMapBtnControl onClick={logout} />
       <PanelMapControl
         aisLayerItems={aisLayerItems}
-        acitveAisLayerItem={acitveAisLayerItem}
-        onChange={setAcitveAisLayerItem}
+        acitveAisLayerItem={activeAisLayerItem}
+        onChange={setActiveAisLayerItem}
       />
       <MapLoadingControl loading={aisLayerLoading} />
     </MapContainer>

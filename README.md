@@ -47,7 +47,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Docker
 
-docker build -t registry.nextgis.com/walrus-ais-front:latest -f docker/Dockerfile .
-docker push registry.nextgis.com/walrus-ais-front:latest
+docker build -t registry.nextgis.com/walrus-ais-front:latest -f docker/Dockerfile . && docker push registry.nextgis.com/walrus-ais-front:latest
 
 docker run -it -p 8080:80 --rm --name walrus-ais-front registry.nextgis.com/walrus-ais-front:latest

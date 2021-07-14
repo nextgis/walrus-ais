@@ -172,12 +172,14 @@ export function LoginContainer<
                   display: 'block',
                   marginLeft: 'auto',
                   marginRight: 'auto',
-                  width: '40%',
+                  width: '95px',
                 }}
               >
                 <img src={Logo} style={{ height: '120px' }} />
               </div>
-              <Heading>Walrus AIS</Heading>
+              <Heading className="has-text-centered" style={{ color: 'black' }}>
+                Walrus AIS
+              </Heading>
               {getFromMem() ? (
                 <Progress />
               ) : (
