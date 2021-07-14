@@ -1,85 +1,72 @@
 import { useEffect, useState } from 'react';
+import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
 import { groupResource } from '../config';
-import { nullValStr } from '../constants';
+import { NULL_STR } from '../constants';
 import { MapContainer } from '../NgwMap/Map';
 import connector from '../services/connector';
 import { parseDateFromResourceName } from '../utils/parseDateFromResourceName';
 import { LogoutMapBtnControl } from './LogoutMapBtnControl';
 import { PanelMapControl } from './PanelMapControl';
 
+import type { FeatureCollection, Point } from 'geojson';
 import type { NgwMap } from '@nextgis/ngw-map';
-import type { AisLayerItem, DateDict, WalrusMapFilter } from '../interfaces';
+import type { Expression } from '@nextgis/paint';
+import type {
+  AisLayerItem,
+  AisProperties,
+  AstdCat,
+  DateDict,
+  WalrusMapFilter,
+} from '../interfaces';
 import { MapLoadingControl } from './MapLoadingControl';
+import { getRandomColor } from '../utils/getRandomColor';
 
 interface WalrusMapProps {
   onLogout: () => void;
 }
 
+const dateStr = (dt: DateDict) => '' + dt.year + dt.month;
+
 export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   props: Props,
 ) {
+  const [ngwMap, setNgwMap] = useState<NgwMap | null>(null);
+
   const [aisLayerLoading, setAisLayerLoading] = useState(false);
   const [aisLayerItems, setAisLayerItems] = useState<AisLayerItem[]>([]);
   const [activeAisLayerItem, setActiveAisLayerItem] =
     useState<AisLayerItem | null>(null);
-  const [ngwMap, setNgwMap] = useState<NgwMap | null>(null);
+
+  const [astdCatList, setAstdCatList] = useState<AstdCat[]>([]);
+  const [activeAstdCat, setActiveAstdCat] = useState<AstdCat>('');
+
   const logout = () => props.onLogout();
-  const dateStr = (dt: DateDict) => '' + dt.year + dt.month;
   useEffect(() => {
-    const request = connector
-      .getResourceChildren(groupResource)
-      .then((data) => {
-        const items: AisLayerItem[] = [];
-        for (const i of data) {
-          const res = i.resource;
-          if (
-            res.cls === 'vector_layer' &&
-            res.display_name.startsWith('ASTD_area_level')
-          ) {
-            items.push({
-              resource: res.id,
-              name: res.display_name,
-              ...parseDateFromResourceName(res.display_name),
-            });
-          }
-        }
-        items.sort((a, b) => (dateStr(b) > dateStr(a) ? 1 : -1));
-        setActiveAisLayerItem(items[0]);
-        setAisLayerItems(items);
-      });
+    const request = fetchAisLayers().then((items) => {
+      setActiveAisLayerItem(items[0]);
+      setAisLayerItems(items);
+    });
     return () => {
       request.cancel();
     };
   }, []);
 
-  const addAisLayer = (ngwMap_: NgwMap, resource: number) => {
-    setAisLayerLoading(() => true);
-    ngwMap_
-      .addNgwLayer({
-        id: 'ais-layer',
-        resource,
-        adapterOptions: {
-          waitFullLoad: true,
-          paint: {
-            color: 'blue',
-            stroke: true,
-            strokeColor: 'white',
-            opacity: 1,
-            radius: 4,
-          },
-        },
-        // adapter: 'IMAGE',
-      })
-      .finally(() => {
-        setAisLayerLoading(() => false);
-      });
-  };
-
   useEffect(() => {
     if (ngwMap) {
       ngwMap.removeLayer('ais-layer');
       if (activeAisLayerItem) {
-        addAisLayer(ngwMap, activeAisLayerItem.resource);
+        setAisLayerLoading(() => true);
+        addAisLayer(ngwMap, activeAisLayerItem.resource)
+          .then(({ astdCatList }) => {
+            setAstdCatList(astdCatList);
+
+            if (!astdCatList.includes(activeAstdCat)) {
+              setActiveAstdCat(astdCatList[0]);
+            }
+          })
+          .finally(() => {
+            setAisLayerLoading(() => false);
+          });
       }
     }
   }, [activeAisLayerItem]);
@@ -88,10 +75,10 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     setNgwMap(ngwMap);
   };
 
-  const onFilterChangeChange = (filter: WalrusMapFilter) => {
+  const onFilterChangeChange = (filter: Partial<WalrusMapFilter>) => {
     if (filter.date) {
       const { year, month } = filter.date;
-      if ([year, month].every((x) => x && x !== nullValStr)) {
+      if ([year, month].every((x) => x && x !== NULL_STR)) {
         const exist = aisLayerItems.find(
           (x) => x.year === year && x.month === month,
         );
@@ -112,11 +99,74 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     >
       <LogoutMapBtnControl onClick={logout} />
       <PanelMapControl
-        aisLayerItems={aisLayerItems}
-        activeAisLayerItem={activeAisLayerItem}
+        {...{ aisLayerItems, activeAisLayerItem, astdCatList, activeAstdCat }}
         onFilterChange={onFilterChangeChange}
       />
       <MapLoadingControl loading={aisLayerLoading} />
     </MapContainer>
   );
+}
+
+function addAisLayer(ngwMap_: NgwMap, resource: number) {
+  return fetchNgwLayerFeatures<Point, AisProperties>({
+    connector: ngwMap_.connector,
+    resourceId: resource,
+    fields: ['shipid', 'astd_cat'],
+  }).then((features) => {
+    const astdCatList: AstdCat[] = [];
+    const color: Expression = ['match', ['get', 'shipid']];
+    const shipidList: string[] = [];
+    for (const f of features) {
+      const shipid = f.properties['shipid'];
+      const astdCat = f.properties['astd_cat'];
+      if (!shipidList.includes(shipid)) {
+        shipidList.push(shipid);
+        color.push(shipid);
+        color.push(getRandomColor());
+      }
+      if (!astdCatList.includes(astdCat)) {
+        astdCatList.push(astdCat);
+      }
+    }
+    // last item is default value
+    color.push('gray');
+    const data: FeatureCollection<Point, AisProperties> = {
+      type: 'FeatureCollection',
+      features,
+    };
+    ngwMap_.addGeoJsonLayer({
+      id: 'ais-layer',
+      data,
+      limit: 30000,
+      paint: {
+        color,
+        stroke: true,
+        strokeColor: 'white',
+        opacity: 1,
+        radius: 4,
+      },
+    });
+    return { astdCatList };
+  });
+}
+
+function fetchAisLayers() {
+  return connector.getResourceChildren(groupResource).then((data) => {
+    const items: AisLayerItem[] = [];
+    for (const i of data) {
+      const res = i.resource;
+      if (
+        res.cls === 'vector_layer' &&
+        res.display_name.startsWith('ASTD_area_level')
+      ) {
+        items.push({
+          resource: res.id,
+          name: res.display_name,
+          ...parseDateFromResourceName(res.display_name),
+        });
+      }
+    }
+    items.sort((a, b) => (dateStr(b) > dateStr(a) ? 1 : -1));
+    return items;
+  });
 }

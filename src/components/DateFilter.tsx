@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Form } from 'react-bulma-components';
-import { nullValStr } from '../constants';
+import { MONTHS, NULL_STR } from '../constants';
 
 import type { ChangeEvent, FunctionComponent } from 'react';
 
@@ -25,8 +25,8 @@ export const DateFilter: FunctionComponent<DateFilterProps> = (props) => {
   }
 
   const cur = props.activeAisLayerItem;
-  const [year, setYear] = useState<string>(cur ? cur.year : nullValStr);
-  const [month, setMonth] = useState<string>(cur ? cur.month : nullValStr);
+  const [year, setYear] = useState<string>(cur ? cur.year : NULL_STR);
+  const [month, setMonth] = useState<string>(cur ? cur.month : NULL_STR);
   const [months, setMonths] = useState<string[]>([]);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const DateFilter: FunctionComponent<DateFilterProps> = (props) => {
     const y = e.target.value;
     // if the new year does not contain selected month
     if (!calendar[y].includes(month)) {
-      setMonth(nullValStr);
+      setMonth(NULL_STR);
     }
     setYear(y);
   };
@@ -67,10 +67,9 @@ export const DateFilter: FunctionComponent<DateFilterProps> = (props) => {
         <Form.Control>
           <Form.Label>Месяц</Form.Label>
           <Form.Select onChange={onMonthChange} value={month}>
-            <option value={nullValStr}>{nullValStr}</option>
             {months.map((x) => (
               <option key={x} value={x}>
-                {x}
+                {MONTHS[Number(x) - 1]}
               </option>
             ))}
           </Form.Select>
