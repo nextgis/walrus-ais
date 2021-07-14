@@ -7,3 +7,7 @@ export interface DateDict {
   year: string;
   month: string;
 }
+
+export interface WalrusMapFilter {
+  date: DateDict | null;
+}

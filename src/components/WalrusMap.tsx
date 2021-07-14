@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { groupResource } from '../config';
+import { nullValStr } from '../constants';
 import { MapContainer } from '../NgwMap/Map';
 import connector from '../services/connector';
 import { parseDateFromResourceName } from '../utils/parseDateFromResourceName';
@@ -7,7 +8,7 @@ import { LogoutMapBtnControl } from './LogoutMapBtnControl';
 import { PanelMapControl } from './PanelMapControl';
 
 import type { NgwMap } from '@nextgis/ngw-map';
-import type { AisLayerItem, DateDict } from '../interfaces';
+import type { AisLayerItem, DateDict, WalrusMapFilter } from '../interfaces';
 import { MapLoadingControl } from './MapLoadingControl';
 
 interface WalrusMapProps {
@@ -51,34 +52,55 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     };
   }, []);
 
-  useEffect(() => {
-    if (ngwMap && activeAisLayerItem) {
-      ngwMap.removeLayer('ais-layer');
-      setAisLayerLoading(true);
-      ngwMap
-        .addNgwLayer({
-          id: 'ais-layer',
-          resource: activeAisLayerItem.resource,
-          adapterOptions: {
-            waitFullLoad: true,
-            paint: {
-              color: 'blue',
-              stroke: true,
-              strokeColor: 'white',
-              opacity: 1,
-              radius: 4,
-            },
+  const addAisLayer = (ngwMap_: NgwMap, resource: number) => {
+    setAisLayerLoading(() => true);
+    ngwMap_
+      .addNgwLayer({
+        id: 'ais-layer',
+        resource,
+        adapterOptions: {
+          waitFullLoad: true,
+          paint: {
+            color: 'blue',
+            stroke: true,
+            strokeColor: 'white',
+            opacity: 1,
+            radius: 4,
           },
-          // adapter: 'IMAGE',
-        })
-        .finally(() => {
-          setAisLayerLoading(false);
-        });
+        },
+        // adapter: 'IMAGE',
+      })
+      .finally(() => {
+        setAisLayerLoading(() => false);
+      });
+  };
+
+  useEffect(() => {
+    if (ngwMap) {
+      ngwMap.removeLayer('ais-layer');
+      if (activeAisLayerItem) {
+        addAisLayer(ngwMap, activeAisLayerItem.resource);
+      }
     }
-  }, [activeAisLayerItem, ngwMap]);
+  }, [activeAisLayerItem]);
 
   const setupMapLayers = (ngwMap: NgwMap) => {
     setNgwMap(ngwMap);
+  };
+
+  const onFilterChangeChange = (filter: WalrusMapFilter) => {
+    if (filter.date) {
+      const { year, month } = filter.date;
+      if ([year, month].every((x) => x && x !== nullValStr)) {
+        const exist = aisLayerItems.find(
+          (x) => x.year === year && x.month === month,
+        );
+        if (exist && ngwMap) {
+          return setActiveAisLayerItem(exist);
+        }
+      }
+    }
+    setActiveAisLayerItem(null);
   };
 
   return (
@@ -91,8 +113,8 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
       <LogoutMapBtnControl onClick={logout} />
       <PanelMapControl
         aisLayerItems={aisLayerItems}
-        acitveAisLayerItem={activeAisLayerItem}
-        onChange={setActiveAisLayerItem}
+        activeAisLayerItem={activeAisLayerItem}
+        onFilterChange={onFilterChangeChange}
       />
       <MapLoadingControl loading={aisLayerLoading} />
     </MapContainer>

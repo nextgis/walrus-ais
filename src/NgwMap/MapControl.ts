@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useNgwMapContext } from './context';
 
@@ -15,14 +15,15 @@ export function MapControl<P extends MapControlProps = MapControlProps>(
 
   const context = useNgwMapContext();
 
-  const portal = document.createElement('div');
+  const el = document.createElement('div');
+  const portal = useRef(el);
 
   function createInstance() {
     return context.ngwMap.createControl(
       {
         onAdd() {
           const el = document.createElement('div');
-          el.appendChild(portal);
+          el.appendChild(portal.current);
           return el;
         },
 
@@ -33,19 +34,19 @@ export function MapControl<P extends MapControlProps = MapControlProps>(
       { bar, margin, addClass },
     );
   }
-  const instance = createInstance();
+  const instance = useRef(createInstance());
   const position = props.position || 'top-left';
 
   useEffect(
     function addControl() {
-      context.ngwMap.addControl(instance, position);
+      context.ngwMap.addControl(instance.current, position);
 
       return function removeControl() {
-        context.ngwMap.removeControl(instance);
+        context.ngwMap.removeControl(instance.current);
       };
     },
     [context.ngwMap, instance],
   );
 
-  return createPortal(props.children, portal);
+  return createPortal(props.children, portal.current);
 }
