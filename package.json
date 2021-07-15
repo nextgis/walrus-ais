@@ -31,7 +31,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.ts{,x}",
-    "lint": "tsc --noEmit && eslint src/**/*.ts{,x}"
+    "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
+    "docker": "docker build -t registry.nextgis.com/walrus-ais-front:latest -f docker/Dockerfile . && docker push registry.nextgis.com/walrus-ais-front:latest"
   },
   "browserslist": {
     "production": [
