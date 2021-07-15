@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
+import Progress from '@nextgis/progress';
 import { groupResource } from '../config';
 import { NULL_STR } from '../constants';
 import { MapContainer } from '../NgwMap/Map';
@@ -11,7 +12,9 @@ import { PanelMapControl } from './PanelMapControl';
 import type { FeatureCollection, Point } from 'geojson';
 import type { NgwMap } from '@nextgis/ngw-map';
 import type { Expression } from '@nextgis/paint';
+import type CancelablePromise from '@nextgis/cancelable-promise';
 import type {
+  AisFilterData,
   AisLayerItem,
   AisProperties,
   AstdCat,
@@ -20,6 +23,7 @@ import type {
 } from '../interfaces';
 import { MapLoadingControl } from './MapLoadingControl';
 import { getRandomColor } from '../utils/getRandomColor';
+import { useRef } from 'react';
 
 interface WalrusMapProps {
   onLogout: () => void;
@@ -40,35 +44,52 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   const [astdCatList, setAstdCatList] = useState<AstdCat[]>([]);
   const [activeAstdCat, setActiveAstdCat] = useState<AstdCat>('');
 
+  const progress = useRef(new Progress());
+
+  const setupProgress = () => {
+    progress.current.emitter.on('start', () => {
+      setAisLayerLoading(true);
+    });
+    progress.current.emitter.on('stop', () => {
+      setAisLayerLoading(false);
+    });
+  };
+
   const logout = () => props.onLogout();
   useEffect(() => {
     const request = fetchAisLayers().then((items) => {
       setActiveAisLayerItem(items[0]);
       setAisLayerItems(items);
     });
+    setupProgress();
     return () => {
       request.cancel();
+      progress.current.emitter.removeAllListeners();
     };
   }, []);
 
   useEffect(() => {
+    let req: CancelablePromise<void>;
     if (ngwMap) {
       ngwMap.removeLayer('ais-layer');
       if (activeAisLayerItem) {
-        setAisLayerLoading(() => true);
-        addAisLayer(ngwMap, activeAisLayerItem.resource)
+        progress.current.addLoading();
+        req = addAisLayer(ngwMap, activeAisLayerItem.resource)
           .then(({ astdCatList }) => {
             setAstdCatList(astdCatList);
-
+            progress.current.addLoaded();
             if (!astdCatList.includes(activeAstdCat)) {
               setActiveAstdCat(astdCatList[0]);
             }
           })
-          .finally(() => {
-            setAisLayerLoading(() => false);
+          .catch(() => {
+            progress.current.addLoaded();
           });
       }
     }
+    return () => {
+      req && req.cancel();
+    };
   }, [activeAisLayerItem]);
 
   const setupMapLayers = (ngwMap: NgwMap) => {
@@ -107,11 +128,15 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   );
 }
 
-function addAisLayer(ngwMap_: NgwMap, resource: number) {
+function addAisLayer(
+  ngwMap_: NgwMap,
+  resource: number,
+): CancelablePromise<AisFilterData> {
   return fetchNgwLayerFeatures<Point, AisProperties>({
     connector: ngwMap_.connector,
     resourceId: resource,
     fields: ['shipid', 'astd_cat'],
+    limit: 52000,
   }).then((features) => {
     const astdCatList: AstdCat[] = [];
     const color: Expression = ['match', ['get', 'shipid']];
@@ -137,7 +162,6 @@ function addAisLayer(ngwMap_: NgwMap, resource: number) {
     ngwMap_.addGeoJsonLayer({
       id: 'ais-layer',
       data,
-      limit: 30000,
       paint: {
         color,
         stroke: true,

@@ -32,10 +32,10 @@ export const PanelMapControl: FunctionComponent<PanelMapControlProps> = (
                 {...{ activeAisLayerItem, aisLayerItems }}
                 onChange={(date) => props.onFilterChange({ date })}
               ></DateFilter>
-              {/* <AstdCatSelect
+              <AstdCatSelect
                 {...{ activeAstdCat, astdCatList }}
                 onChange={(astdCat) => props.onFilterChange({ astdCat })}
-              ></AstdCatSelect> */}
+              ></AstdCatSelect>
             </>
           ) : (
             <p className="is-size-6">Загрузка списка слоёв...</p>

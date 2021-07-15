@@ -1589,6 +1589,11 @@
     "@nextgis/properties-filter" "^1.2.1"
     geojson "^0.5.0"
 
+"@nextgis/progress@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@nextgis/progress/-/progress-1.2.0.tgz#c60a88dfcf0dc3c24ab65ecc365e964760a50d49"
+  integrity sha512-BlW2E+oOHsaOmKrrmjugt0dzJkZxyzy8dHAtwSZTsy0/0FRJ2zYXDccn61NjoM2TT0Wq7s3nieZYCxC9HSdNLQ==
+
 "@nextgis/properties-filter@^1.2.1":
   version "1.2.1"
   resolved "https://registry.npmjs.org/@nextgis/properties-filter/-/properties-filter-1.2.1.tgz"
