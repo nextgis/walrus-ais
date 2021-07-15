@@ -5,10 +5,10 @@ import {
   AIS_DEF_FILTER_DATA,
   AIS_LAYER_ID,
   NULL_STR,
+  fuelQList,
   astdCatList,
   iceClassList,
   sizeGroupList,
-  fuelQList,
 } from '../constants';
 import { MapContainer } from '../NgwMap/Map';
 import { addAisLayer } from '../utils/addAisLayer';
@@ -30,7 +30,6 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   props: Props,
 ) {
   const [ngwMap, setNgwMap] = useState<NgwMap | null>(null);
-
   const [aisLayerLoading, setAisLayerLoading] = useState(false);
   const [aisLayerItems, setAisLayerItems] = useState<AisLayerItem[]>([]);
   const [activeAisLayerItem, setActiveAisLayerItem] =
@@ -43,9 +42,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     fuelq: fuelQList,
   });
   const aisFilterData = AIS_DEF_FILTER_DATA;
-
   const progress = useRef(new Progress());
-
   const setupProgress = () => {
     progress.current.emitter.on('start', () => {
       setAisLayerLoading(true);
@@ -54,9 +51,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
       setAisLayerLoading(false);
     });
   };
-
-  const logout = () => props.onLogout();
-
+  // load layers list on mount to fill calendar
   useEffect(() => {
     setupProgress();
     progress.current.addLoading();
@@ -76,12 +71,14 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     };
   }, []);
 
+  // set filter for current ais layer
   useEffect(() => {
     if (ngwMap && ngwMap.getLayer(AIS_LAYER_ID)) {
       ngwMap.propertiesFilter(AIS_LAYER_ID, generateFilter(aisFilter));
     }
   }, [aisFilter]);
 
+  // add a layer on the map when calendar changes
   useEffect(() => {
     let req: CancelablePromise<void>;
     if (ngwMap) {
@@ -106,10 +103,6 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     };
   }, [activeAisLayerItem]);
 
-  const setupMapLayers = (ngwMap: NgwMap) => {
-    setNgwMap(ngwMap);
-  };
-
   const onDateChange = (date: DateDict | null) => {
     if (date) {
       const { year, month } = date;
@@ -125,7 +118,6 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     setActiveAisLayerItem(null);
   };
   const onFilterChange = (filter: Partial<AisFilterInterface>) => {
-    console.log(filter);
     setAisFilter((prevState) => ({ ...prevState, ...filter }));
   };
 
@@ -134,9 +126,9 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
       id="map"
       qmsId={448}
       bounds={[41.3607, 67.9801, 66.5899, 70.6804]}
-      whenCreated={setupMapLayers}
+      whenCreated={setNgwMap}
     >
-      <LogoutMapBtnControl onClick={logout} />
+      <LogoutMapBtnControl onClick={props.onLogout} />
       <PanelMapControl
         {...{
           aisLayerItems,
