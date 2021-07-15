@@ -9,7 +9,7 @@ max_line_length = 80
 spaces_around_brackets = true
 end_of_line = lf
 
-[*{.ts,.js}]
+[*{.ts,tsx,.js,jsx}]
 indent_size = 2
 quote_type = single
 

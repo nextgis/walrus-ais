@@ -1,6 +1,5 @@
-import { Form } from 'react-bulma-components';
-
 import type { FunctionComponent } from 'react';
+import { Columns, Form } from 'react-bulma-components';
 import type { AisFilterData, AisFilterInterface } from '../interfaces';
 import { MultiplySelect } from './MultiplySelect';
 
@@ -12,22 +11,92 @@ interface AisFilterProps {
 
 export const AisFilter: FunctionComponent<AisFilterProps> = (props) => {
   const data = props.aisFilterData;
-  const cat = props.aisFilter.astd_cat;
-
-  // const [cat, setCat] = useState<AstdCat | null>(props.aisFilter.astd_cat);
-  // const onCatChange = (e: ChangeEvent<HTMLSelectElement>) => {
-  //   setCat(e.target.value);
-  // };
+  const { astd_cat, iceclass, sizegroup, fuelq } = props.aisFilter;
 
   return (
     <>
-      <MultiplySelect
-        up
-        label="Тип судна"
-        items={data.astdCatList}
-        value={cat}
-        onChange={(astd_cat) => props.onChange({ astd_cat })}
-      />
+      <Form.Field>
+        <Form.Field kind="group">
+          <Form.Control>
+            <MultiplySelect
+              up
+              label="Тип судна"
+              items={data.astdCatList}
+              value={astd_cat}
+              onChange={(astd_cat) => props.onChange({ astd_cat })}
+            />
+          </Form.Control>
+          <Form.Control>
+            <MultiplySelect
+              up
+              label="Ледовый класс"
+              items={data.iceClassList}
+              value={iceclass}
+              onChange={(iceclass) => props.onChange({ iceclass })}
+            />
+          </Form.Control>
+        </Form.Field>
+        <Form.Field kind="group">
+          <Form.Control>
+            <MultiplySelect
+              up
+              label="Тоннаж"
+              items={data.sizeGroupList}
+              value={sizegroup}
+              onChange={(sizegroup) => props.onChange({ sizegroup })}
+            />
+          </Form.Control>
+          <Form.Control>
+            <MultiplySelect
+              up
+              label="Качество топлива"
+              items={data.fuelQList}
+              value={fuelq}
+              onChange={(fuelq) => props.onChange({ fuelq })}
+            />
+          </Form.Control>
+        </Form.Field>
+      </Form.Field>
+      {/* <Columns>
+        <Columns.Column>
+          <MultiplySelect
+            up
+            label="Тип судна"
+            items={data.astdCatList}
+            value={astd_cat}
+            onChange={(astd_cat) => props.onChange({ astd_cat })}
+          />
+        </Columns.Column>
+        <Columns.Column>
+          <MultiplySelect
+            up
+            label="Ледовый класс"
+            items={data.iceClassList}
+            value={iceclass}
+            onChange={(iceclass) => props.onChange({ iceclass })}
+          />
+        </Columns.Column>
+      </Columns>
+      <Columns>
+        <Columns.Column>
+          <MultiplySelect
+            up
+            label="Тоннаж"
+            items={data.sizeGroupList}
+            value={sizegroup}
+            onChange={(sizegroup) => props.onChange({ sizegroup })}
+          />
+        </Columns.Column>
+        <Columns.Column>
+          <MultiplySelect
+            up
+            label="Качество топлива"
+            items={data.sizeGroupList}
+            value={sizegroup}
+            onChange={(sizegroup) => props.onChange({ sizegroup })}
+          />
+        </Columns.Column>
+      </Columns> */}
     </>
   );
 };

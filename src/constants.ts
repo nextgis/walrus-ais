@@ -4,6 +4,8 @@ export const RMBR_KEY = 'ngw-login';
 
 export const NULL_STR = '---';
 
+export const AIS_LAYER_ID = 'ais-layer';
+
 export const MONTHS = [
   'январь',
   'февраль',
@@ -46,10 +48,21 @@ export const iceClassList = [
   'FS Ice Class II',
 ];
 
-export const sizeGroupList = ['0', '1', '2', '3', '4', '5', '6'];
+export const fuelQList = ['0', '1', '2', '3', '4', '5', '6'];
+
+export const sizeGroupList = [
+  '< 1000 GT',
+  '1000 - 4999 GT',
+  '5000 - 9999 GT',
+  '10000 - 24999',
+  '25000 - 49999',
+  '50000 - 99999',
+  '>= 100000',
+];
 
 export const AIS_DEF_FILTER_DATA: AisFilterData = {
   astdCatList,
   iceClassList,
   sizeGroupList,
+  fuelQList,
 };

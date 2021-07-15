@@ -1,21 +1,32 @@
 import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
 import { getRandomColor } from '../utils/getRandomColor';
+import { AIS_DEF_FILTER_DATA, AIS_LAYER_ID } from '../constants';
 
 import type { FeatureCollection, Point } from 'geojson';
 import type { NgwMap } from '@nextgis/ngw-map';
 import type { Expression } from '@nextgis/paint';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { AisProperties, AstdCat } from '../interfaces';
+import { generateFilter } from './generateFilter';
 
-export function addAisLayer(
-  ngwMap_: NgwMap,
-  resource: number,
-): CancelablePromise<void> {
+export function addAisLayer({
+  ngwMap,
+  resource,
+  filter,
+}: {
+  ngwMap: NgwMap;
+  resource: number;
+  filter: PropertiesFilter;
+}): CancelablePromise<void> {
   return fetchNgwLayerFeatures<Point, AisProperties>({
-    connector: ngwMap_.connector,
+    connector: ngwMap.connector,
     resourceId: resource,
-    fields: ['shipid', 'astd_cat'],
-    limit: 52000,
+    fields: ['shipid', 'astd_cat', 'iceclass', 'sizegroup', 'fuelq'],
+    // load optimization only for default full filter
+    filters: generateFilter(AIS_DEF_FILTER_DATA),
+    limit: 55000,
+    cache: true,
   }).then((features) => {
     const astdCatList: AstdCat[] = [];
     const color: Expression = ['match', ['get', 'shipid']];
@@ -38,16 +49,20 @@ export function addAisLayer(
       type: 'FeatureCollection',
       features,
     };
-    ngwMap_.addGeoJsonLayer({
-      id: 'ais-layer',
-      data,
-      paint: {
-        color,
-        stroke: true,
-        strokeColor: 'white',
-        opacity: 1,
-        radius: 4,
-      },
-    });
+    ngwMap
+      .addGeoJsonLayer({
+        id: AIS_LAYER_ID,
+        data,
+        paint: {
+          color,
+          stroke: true,
+          strokeColor: 'white',
+          opacity: 1,
+          radius: 4,
+        },
+      })
+      .then(() => {
+        ngwMap.propertiesFilter(AIS_LAYER_ID, filter);
+      });
   });
 }

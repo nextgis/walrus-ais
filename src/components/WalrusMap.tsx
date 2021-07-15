@@ -1,9 +1,18 @@
 import { useEffect, useState, useRef } from 'react';
 
 import Progress from '@nextgis/progress';
-import { NULL_STR, AIS_DEF_FILTER_DATA } from '../constants';
+import {
+  AIS_DEF_FILTER_DATA,
+  AIS_LAYER_ID,
+  NULL_STR,
+  astdCatList,
+  iceClassList,
+  sizeGroupList,
+  fuelQList,
+} from '../constants';
 import { MapContainer } from '../NgwMap/Map';
 import { addAisLayer } from '../utils/addAisLayer';
+import { generateFilter } from '../utils/generateFilter';
 import { fetchAisFeatures } from '../utils/fetchAisFeatures';
 import { LogoutMapBtnControl } from './LogoutMapBtnControl';
 import { PanelMapControl } from './PanelMapControl';
@@ -28,9 +37,10 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     useState<AisLayerItem | null>(null);
 
   const [aisFilter, setAisFilter] = useState<AisFilterInterface>({
-    astd_cat: [],
-    iceclass: [],
-    sizegroup: [],
+    astd_cat: astdCatList,
+    iceclass: iceClassList,
+    sizegroup: sizeGroupList,
+    fuelq: fuelQList,
   });
   const aisFilterData = AIS_DEF_FILTER_DATA;
 
@@ -46,12 +56,20 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   };
 
   const logout = () => props.onLogout();
+
   useEffect(() => {
-    const request = fetchAisFeatures().then((items) => {
-      setActiveAisLayerItem(items[0]);
-      setAisLayerItems(items);
-    });
     setupProgress();
+    progress.current.addLoading();
+    const request = fetchAisFeatures()
+      .then((items) => {
+        progress.current.addLoaded();
+        setActiveAisLayerItem(items[0]);
+        setAisLayerItems(items);
+      })
+      .catch(() => {
+        progress.current.addLoaded();
+      });
+
     return () => {
       request.cancel();
       progress.current.emitter.removeAllListeners();
@@ -59,12 +77,22 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   }, []);
 
   useEffect(() => {
+    if (ngwMap && ngwMap.getLayer(AIS_LAYER_ID)) {
+      ngwMap.propertiesFilter(AIS_LAYER_ID, generateFilter(aisFilter));
+    }
+  }, [aisFilter]);
+
+  useEffect(() => {
     let req: CancelablePromise<void>;
     if (ngwMap) {
-      ngwMap.removeLayer('ais-layer');
+      ngwMap.removeLayer(AIS_LAYER_ID);
       if (activeAisLayerItem) {
         progress.current.addLoading();
-        req = addAisLayer(ngwMap, activeAisLayerItem.resource)
+        req = addAisLayer({
+          ngwMap,
+          resource: activeAisLayerItem.resource,
+          filter: generateFilter(aisFilter),
+        })
           .then(() => {
             progress.current.addLoaded();
           })

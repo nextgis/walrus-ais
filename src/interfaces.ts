@@ -1,4 +1,9 @@
-import { astdCatList, iceClassList, sizeGroupList } from './constants';
+import {
+  astdCatList,
+  fuelQList,
+  iceClassList,
+  sizeGroupList,
+} from './constants';
 
 export interface AisLayerItem extends DateDict {
   name: string;
@@ -13,17 +18,20 @@ export interface DateDict {
 export type AstdCat = typeof astdCatList[number];
 export type IceClass = typeof iceClassList[number];
 export type SizeGroup = typeof sizeGroupList[number];
+export type FuelQ = typeof fuelQList[number];
 
 export interface AisFilterInterface {
   astd_cat: AstdCat[];
   iceclass: IceClass[];
   sizegroup: SizeGroup[];
+  fuelq: FuelQ[];
 }
 
 export interface AisFilterData {
   readonly astdCatList: AstdCat[];
   readonly iceClassList: IceClass[];
   readonly sizeGroupList: SizeGroup[];
+  readonly fuelQList: FuelQ[];
 }
 
 export interface AisProperties {

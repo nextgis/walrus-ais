@@ -25,7 +25,7 @@ export const MapLoadingControl: FunctionComponent<MapLoadingControl> = (
             pointerEvents: 'none',
           }}
         >
-          <Progress style={{ width: '80vh', maxWidth: '400px' }} />
+          <Progress style={{ width: '80%', maxWidth: '400px' }} />
         </div>
       )}
     </>
