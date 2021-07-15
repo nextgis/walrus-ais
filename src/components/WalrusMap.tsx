@@ -1,35 +1,21 @@
-import { useEffect, useState } from 'react';
-import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
+import { useEffect, useState, useRef } from 'react';
+
 import Progress from '@nextgis/progress';
-import { groupResource } from '../config';
-import { NULL_STR } from '../constants';
+import { NULL_STR, AIS_DEF_FILTER_DATA } from '../constants';
 import { MapContainer } from '../NgwMap/Map';
-import connector from '../services/connector';
-import { parseDateFromResourceName } from '../utils/parseDateFromResourceName';
+import { addAisLayer } from '../utils/addAisLayer';
+import { fetchAisFeatures } from '../utils/fetchAisFeatures';
 import { LogoutMapBtnControl } from './LogoutMapBtnControl';
 import { PanelMapControl } from './PanelMapControl';
-
-import type { FeatureCollection, Point } from 'geojson';
-import type { NgwMap } from '@nextgis/ngw-map';
-import type { Expression } from '@nextgis/paint';
-import type CancelablePromise from '@nextgis/cancelable-promise';
-import type {
-  AisFilterData,
-  AisLayerItem,
-  AisProperties,
-  AstdCat,
-  DateDict,
-  WalrusMapFilter,
-} from '../interfaces';
 import { MapLoadingControl } from './MapLoadingControl';
-import { getRandomColor } from '../utils/getRandomColor';
-import { useRef } from 'react';
+
+import type { NgwMap } from '@nextgis/ngw-map';
+import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { AisFilterInterface, AisLayerItem, DateDict } from '../interfaces';
 
 interface WalrusMapProps {
   onLogout: () => void;
 }
-
-const dateStr = (dt: DateDict) => '' + dt.year + dt.month;
 
 export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   props: Props,
@@ -41,8 +27,12 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   const [activeAisLayerItem, setActiveAisLayerItem] =
     useState<AisLayerItem | null>(null);
 
-  const [astdCatList, setAstdCatList] = useState<AstdCat[]>([]);
-  const [activeAstdCat, setActiveAstdCat] = useState<AstdCat>('');
+  const [aisFilter, setAisFilter] = useState<AisFilterInterface>({
+    astd_cat: [],
+    iceclass: [],
+    sizegroup: [],
+  });
+  const aisFilterData = AIS_DEF_FILTER_DATA;
 
   const progress = useRef(new Progress());
 
@@ -57,7 +47,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
 
   const logout = () => props.onLogout();
   useEffect(() => {
-    const request = fetchAisLayers().then((items) => {
+    const request = fetchAisFeatures().then((items) => {
       setActiveAisLayerItem(items[0]);
       setAisLayerItems(items);
     });
@@ -75,12 +65,8 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
       if (activeAisLayerItem) {
         progress.current.addLoading();
         req = addAisLayer(ngwMap, activeAisLayerItem.resource)
-          .then(({ astdCatList }) => {
-            setAstdCatList(astdCatList);
+          .then(() => {
             progress.current.addLoaded();
-            if (!astdCatList.includes(activeAstdCat)) {
-              setActiveAstdCat(astdCatList[0]);
-            }
           })
           .catch(() => {
             progress.current.addLoaded();
@@ -96,9 +82,9 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     setNgwMap(ngwMap);
   };
 
-  const onFilterChangeChange = (filter: Partial<WalrusMapFilter>) => {
-    if (filter.date) {
-      const { year, month } = filter.date;
+  const onDateChange = (date: DateDict | null) => {
+    if (date) {
+      const { year, month } = date;
       if ([year, month].every((x) => x && x !== NULL_STR)) {
         const exist = aisLayerItems.find(
           (x) => x.year === year && x.month === month,
@@ -110,6 +96,10 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     }
     setActiveAisLayerItem(null);
   };
+  const onFilterChange = (filter: Partial<AisFilterInterface>) => {
+    console.log(filter);
+    setAisFilter((prevState) => ({ ...prevState, ...filter }));
+  };
 
   return (
     <MapContainer
@@ -120,77 +110,16 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     >
       <LogoutMapBtnControl onClick={logout} />
       <PanelMapControl
-        {...{ aisLayerItems, activeAisLayerItem, astdCatList, activeAstdCat }}
-        onFilterChange={onFilterChangeChange}
+        {...{
+          aisLayerItems,
+          activeAisLayerItem,
+          aisFilter,
+          aisFilterData,
+          onFilterChange,
+          onDateChange,
+        }}
       />
       <MapLoadingControl loading={aisLayerLoading} />
     </MapContainer>
   );
-}
-
-function addAisLayer(
-  ngwMap_: NgwMap,
-  resource: number,
-): CancelablePromise<AisFilterData> {
-  return fetchNgwLayerFeatures<Point, AisProperties>({
-    connector: ngwMap_.connector,
-    resourceId: resource,
-    fields: ['shipid', 'astd_cat'],
-    limit: 52000,
-  }).then((features) => {
-    const astdCatList: AstdCat[] = [];
-    const color: Expression = ['match', ['get', 'shipid']];
-    const shipidList: string[] = [];
-    for (const f of features) {
-      const shipid = f.properties['shipid'];
-      const astdCat = f.properties['astd_cat'];
-      if (!shipidList.includes(shipid)) {
-        shipidList.push(shipid);
-        color.push(shipid);
-        color.push(getRandomColor());
-      }
-      if (!astdCatList.includes(astdCat)) {
-        astdCatList.push(astdCat);
-      }
-    }
-    // last item is default value
-    color.push('gray');
-    const data: FeatureCollection<Point, AisProperties> = {
-      type: 'FeatureCollection',
-      features,
-    };
-    ngwMap_.addGeoJsonLayer({
-      id: 'ais-layer',
-      data,
-      paint: {
-        color,
-        stroke: true,
-        strokeColor: 'white',
-        opacity: 1,
-        radius: 4,
-      },
-    });
-    return { astdCatList };
-  });
-}
-
-function fetchAisLayers() {
-  return connector.getResourceChildren(groupResource).then((data) => {
-    const items: AisLayerItem[] = [];
-    for (const i of data) {
-      const res = i.resource;
-      if (
-        res.cls === 'vector_layer' &&
-        res.display_name.startsWith('ASTD_area_level')
-      ) {
-        items.push({
-          resource: res.id,
-          name: res.display_name,
-          ...parseDateFromResourceName(res.display_name),
-        });
-      }
-    }
-    items.sort((a, b) => (dateStr(b) > dateStr(a) ? 1 : -1));
-    return items;
-  });
 }

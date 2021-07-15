@@ -1223,7 +1223,7 @@
 
 "@iconify/react@^1.1.4":
   version "1.1.4"
-  resolved "https://registry.npmjs.org/@iconify/react/-/react-1.1.4.tgz"
+  resolved "https://registry.yarnpkg.com/@iconify/react/-/react-1.1.4.tgz#c778eddbaf196e55705d0bedff00d039dc1de8d3"
   integrity sha512-oxq8IMOq8q3nKGiDHbQPC8FcFuBsKve68JWBo140d5LRnj0bv5TB/FE/y01ZSvEZ7PlI2HIrnb2qivPN8kTDgw==
 
 "@istanbuljs/load-nyc-config@^1.0.0":

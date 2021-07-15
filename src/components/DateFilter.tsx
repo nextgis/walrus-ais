@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Form } from 'react-bulma-components';
-import { MONTHS, NULL_STR } from '../constants';
+import { MONTHS } from '../constants';
 
 import type { ChangeEvent, FunctionComponent } from 'react';
 
@@ -25,8 +25,8 @@ export const DateFilter: FunctionComponent<DateFilterProps> = (props) => {
   }
 
   const cur = props.activeAisLayerItem;
-  const [year, setYear] = useState<string>(cur ? cur.year : NULL_STR);
-  const [month, setMonth] = useState<string>(cur ? cur.month : NULL_STR);
+  const [year, setYear] = useState<string>(cur ? cur.year : '');
+  const [month, setMonth] = useState<string>(cur ? cur.month : '');
   const [months, setMonths] = useState<string[]>([]);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const DateFilter: FunctionComponent<DateFilterProps> = (props) => {
     const y = e.target.value;
     // if the new year does not contain selected month
     if (!calendar[y].includes(month)) {
-      setMonth(NULL_STR);
+      setMonth('');
     }
     setYear(y);
   };

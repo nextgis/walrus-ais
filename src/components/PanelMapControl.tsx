@@ -1,26 +1,31 @@
 import { Container, Hero } from 'react-bulma-components';
 import { MapControl } from '../NgwMap/MapControl';
 import { DateFilter } from './DateFilter';
-import { AstdCatSelect } from './AstdCatSelect';
+import { AisFilter } from './AisFilter';
 
 import type { FunctionComponent } from 'react';
-import type { AisLayerItem, WalrusMapFilter } from '../interfaces';
+import type {
+  AisFilterData,
+  AisLayerItem,
+  DateDict,
+  AisFilterInterface,
+} from '../interfaces';
 
 interface PanelMapControlProps {
   aisLayerItems: AisLayerItem[];
   activeAisLayerItem: AisLayerItem | null;
 
-  astdCatList: string[];
-  activeAstdCat: string;
+  aisFilter: AisFilterInterface;
+  aisFilterData: AisFilterData;
 
-  onFilterChange: (filter: Partial<WalrusMapFilter>) => void;
+  onFilterChange: (filter: Partial<AisFilterInterface>) => void;
+  onDateChange: (date: DateDict | null) => void;
 }
 
 export const PanelMapControl: FunctionComponent<PanelMapControlProps> = (
   props,
 ) => {
-  const { activeAisLayerItem, aisLayerItems, activeAstdCat, astdCatList } =
-    props;
+  const { activeAisLayerItem, aisLayerItems, aisFilterData, aisFilter } = props;
   return (
     <MapControl position="bottom-left" bar>
       <Hero size="small" color="primary">
@@ -30,12 +35,12 @@ export const PanelMapControl: FunctionComponent<PanelMapControlProps> = (
             <>
               <DateFilter
                 {...{ activeAisLayerItem, aisLayerItems }}
-                onChange={(date) => props.onFilterChange({ date })}
+                onChange={(date) => props.onDateChange(date)}
               ></DateFilter>
-              <AstdCatSelect
-                {...{ activeAstdCat, astdCatList }}
-                onChange={(astdCat) => props.onFilterChange({ astdCat })}
-              ></AstdCatSelect>
+              <AisFilter
+                {...{ aisFilterData, aisFilter }}
+                onChange={(filter) => props.onFilterChange(filter)}
+              ></AisFilter>
             </>
           ) : (
             <p className="is-size-6">Загрузка списка слоёв...</p>
