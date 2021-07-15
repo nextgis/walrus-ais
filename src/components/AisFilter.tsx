@@ -57,46 +57,6 @@ export const AisFilter: FunctionComponent<AisFilterProps> = (props) => {
           </Form.Control>
         </Form.Field>
       </Form.Field>
-      {/* <Columns>
-        <Columns.Column>
-          <MultiplySelect
-            up
-            label="Тип судна"
-            items={data.astdCatList}
-            value={astd_cat}
-            onChange={(astd_cat) => props.onChange({ astd_cat })}
-          />
-        </Columns.Column>
-        <Columns.Column>
-          <MultiplySelect
-            up
-            label="Ледовый класс"
-            items={data.iceClassList}
-            value={iceclass}
-            onChange={(iceclass) => props.onChange({ iceclass })}
-          />
-        </Columns.Column>
-      </Columns>
-      <Columns>
-        <Columns.Column>
-          <MultiplySelect
-            up
-            label="Тоннаж"
-            items={data.sizeGroupList}
-            value={sizegroup}
-            onChange={(sizegroup) => props.onChange({ sizegroup })}
-          />
-        </Columns.Column>
-        <Columns.Column>
-          <MultiplySelect
-            up
-            label="Качество топлива"
-            items={data.sizeGroupList}
-            value={sizegroup}
-            onChange={(sizegroup) => props.onChange({ sizegroup })}
-          />
-        </Columns.Column>
-      </Columns> */}
     </>
   );
 };
