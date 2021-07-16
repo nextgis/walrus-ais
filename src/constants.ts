@@ -5,6 +5,7 @@ export const RMBR_KEY = 'ngw-login';
 export const NULL_STR = '---';
 
 export const AIS_LAYER_ID = 'ais-layer';
+export const WALRUS_LAYER_ID = 'walrus-layer';
 
 export const MONTHS = [
   'январь',

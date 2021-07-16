@@ -1,5 +1,5 @@
 import type { FunctionComponent } from 'react';
-import { Columns, Form } from 'react-bulma-components';
+import { Form } from 'react-bulma-components';
 import type { AisFilterData, AisFilterInterface } from '../interfaces';
 import { MultiplySelect } from './MultiplySelect';
 

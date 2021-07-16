@@ -1,5 +1,6 @@
 import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
-import { getRandomColor } from '../utils/getRandomColor';
+import { generateFilter } from './generateFilter';
+import { getShipidColor } from './getShipidColor';
 import { AIS_DEF_FILTER_DATA, AIS_LAYER_ID } from '../constants';
 
 import type { FeatureCollection, Point } from 'geojson';
@@ -8,7 +9,6 @@ import type { Expression } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { AisProperties, AstdCat } from '../interfaces';
-import { generateFilter } from './generateFilter';
 
 export function addAisLayer({
   ngwMap,
@@ -23,9 +23,9 @@ export function addAisLayer({
     connector: ngwMap.connector,
     resourceId: resource,
     fields: ['shipid', 'astd_cat', 'iceclass', 'sizegroup', 'fuelq'],
-    // load optimization only for default full filter
+    // load optimization. Only for full filter values
     filters: generateFilter(AIS_DEF_FILTER_DATA),
-    limit: 55000,
+    limit: 60000,
     cache: true,
   }).then((features) => {
     const astdCatList: AstdCat[] = [];
@@ -37,7 +37,7 @@ export function addAisLayer({
       if (!shipidList.includes(shipid)) {
         shipidList.push(shipid);
         color.push(shipid);
-        color.push(getRandomColor());
+        color.push(getShipidColor(shipid));
       }
       if (!astdCatList.includes(astdCat)) {
         astdCatList.push(astdCat);
@@ -53,6 +53,7 @@ export function addAisLayer({
       .addGeoJsonLayer({
         id: AIS_LAYER_ID,
         data,
+        order: 10,
         paint: {
           color,
           stroke: true,

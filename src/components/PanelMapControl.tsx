@@ -9,11 +9,14 @@ import type {
   AisLayerItem,
   DateDict,
   AisFilterInterface,
+  AisCalendar,
 } from '../interfaces';
 
 interface PanelMapControlProps {
+  calendar: AisCalendar;
+  activeDate: DateDict | null;
+
   aisLayerItems: AisLayerItem[];
-  activeAisLayerItem: AisLayerItem | null;
 
   aisFilter: AisFilterInterface;
   aisFilterData: AisFilterData;
@@ -25,7 +28,7 @@ interface PanelMapControlProps {
 export const PanelMapControl: FunctionComponent<PanelMapControlProps> = (
   props,
 ) => {
-  const { activeAisLayerItem, aisLayerItems, aisFilterData, aisFilter } = props;
+  const { calendar, activeDate, aisFilterData, aisFilter } = props;
   return (
     <MapControl position="bottom-left" bar>
       <Hero size="small" color="primary">
@@ -34,7 +37,7 @@ export const PanelMapControl: FunctionComponent<PanelMapControlProps> = (
           {props.aisLayerItems.length ? (
             <>
               <DateFilter
-                {...{ activeAisLayerItem, aisLayerItems }}
+                {...{ calendar, activeDate }}
                 onChange={(date) => props.onDateChange(date)}
               ></DateFilter>
               <AisFilter

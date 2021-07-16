@@ -34,6 +34,8 @@ export interface AisFilterData {
   readonly fuelQList: FuelQ[];
 }
 
+export type AisCalendar = { [year: string]: string[] };
+
 export interface AisProperties {
   astd_cat: AstdCat; // "Offshore supply ships"
   datetime: string; // "2020-12-01 00:01:22";
@@ -43,4 +45,13 @@ export interface AisProperties {
   iceclass: IceClass; // 'FS Ice Class 1A';
   shipid: string; // '244';
   sizegroup: SizeGroup; // '5000 - 9999 GT';
+}
+
+export interface WalrusProperties {
+  Platform_I: string;
+  Latitude: string;
+  Longitude: string;
+  Loc_qualit: string;
+  Loc_date: string;
+  dt: number;
 }

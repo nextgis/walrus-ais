@@ -1,62 +1,56 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Form } from 'react-bulma-components';
 import { MONTHS } from '../constants';
 
 import type { ChangeEvent, FunctionComponent } from 'react';
 
-import type { AisLayerItem, DateDict } from '../interfaces';
+import type { AisCalendar, DateDict } from '../interfaces';
 
 interface DateFilterProps {
-  aisLayerItems: AisLayerItem[];
-  activeAisLayerItem: AisLayerItem | null;
+  calendar: AisCalendar;
+  activeDate: DateDict | null;
   onChange: (date: DateDict | null) => void;
 }
 
 export const DateFilter: FunctionComponent<DateFilterProps> = (props) => {
-  const calendar: { [year: string]: string[] } = {};
-  const years: string[] = [];
-  for (const d of props.aisLayerItems) {
-    const exist = calendar[d.year];
-    if (!exist) {
-      calendar[d.year] = [];
-      years.push(d.year);
-    }
-    calendar[d.year].push(d.month);
-  }
+  const { calendar, activeDate } = props;
+  // const [months, setMonths] = useState<string[]>([]);
+  const years: string[] = useMemo(
+    () => Object.keys(calendar).sort(),
+    [calendar],
+  );
 
-  const cur = props.activeAisLayerItem;
-  const [year, setYear] = useState<string>(cur ? cur.year : '');
-  const [month, setMonth] = useState<string>(cur ? cur.month : '');
-  const [months, setMonths] = useState<string[]>([]);
-
-  useEffect(() => {
-    const months_ = year && calendar[year];
+  const months = useMemo<string[]>(() => {
+    const year_ = activeDate && activeDate.year;
+    const months_ = year_ && props.calendar[year_];
     if (months_) {
-      setMonths([...months_].reverse());
+      return [...months_].reverse();
     }
-  }, [year]);
+    return [];
+  }, [activeDate?.year]);
 
-  useEffect(() => {
-    props.onChange({ year, month });
-  }, [year, month]);
+  const onDateChange = (date: Partial<DateDict>) => {
+    props.onChange({ ...activeDate, ...date } as DateDict);
+  };
 
   const onYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const y = e.target.value;
+    const date = { year: y } as DateDict;
     // if the new year does not contain selected month
-    if (!calendar[y].includes(month)) {
-      setMonth('');
+    if (activeDate && !calendar[y].includes(activeDate.month)) {
+      date.month = '';
     }
-    setYear(y);
+    onDateChange(date);
   };
   const onMonthChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setMonth(e.target.value);
+    onDateChange({ month: e.target.value });
   };
   return (
     <>
       <Form.Field kind="group">
         <Form.Control>
           <Form.Label>Год</Form.Label>
-          <Form.Select onChange={onYearChange} value={year}>
+          <Form.Select onChange={onYearChange} value={activeDate?.year}>
             {years.map((x) => (
               <option key={x} value={x}>
                 {x}
@@ -66,7 +60,7 @@ export const DateFilter: FunctionComponent<DateFilterProps> = (props) => {
         </Form.Control>
         <Form.Control>
           <Form.Label>Месяц</Form.Label>
-          <Form.Select onChange={onMonthChange} value={month}>
+          <Form.Select onChange={onMonthChange} value={activeDate?.month}>
             {months.map((x) => (
               <option key={x} value={x}>
                 {MONTHS[Number(x) - 1]}

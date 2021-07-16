@@ -1463,57 +1463,42 @@
   resolved "https://registry.npmjs.org/@mapbox/whoots-js/-/whoots-js-3.1.0.tgz"
   integrity sha512-Es6WcD0nO5l+2BOQS4uLfNPYQaNDfbot3X1XUoloz+x0mPDS3eeORZJl06HXjwBG1fOGwCRnzK88LMdxKRrd6Q==
 
-"@nextgis/cache@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/cache/-/cache-1.2.1.tgz"
-  integrity sha512-nXeaHHtAbJnG/aPyOHFTQ9TtsE6IsrZBDWyRA4dGq8NirOo55jKqSzTZxXphJXEtj5gr4tbtptooTxshcJmKKg==
+"@nextgis/cache@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/cache/-/cache-1.2.2.tgz#4af390e22c71ea1dbbbf7abe087ac35d52b190f3"
+  integrity sha512-WDKFxglIn4j/QH13dcRUMl7/0WHWelTDrtRJ3SBHpCXM2v0nVpH2KHg5hGOkqQyE0F8/4e37Ei9nDWoN6+WW/w==
   dependencies:
-    "@nextgis/utils" "^1.2.1"
+    "@nextgis/utils" "^1.2.2"
 
-"@nextgis/cancelable-promise@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/@nextgis/cancelable-promise/-/cancelable-promise-1.2.0.tgz"
-  integrity sha512-cWP7i/1PvvczKhyzDBAKgOWLd649VNuwUU2g0+BQWtgDCJM3GQgvUDnqYILrMQajASfi0fVv7hEtUm288KBruA==
+"@nextgis/cancelable-promise@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/cancelable-promise/-/cancelable-promise-1.2.2.tgz#a2d89eeae6a30cb36e2b6a2515e77bf698fb3ae6"
+  integrity sha512-m/cztrn7baD56r3GFGo4MliMCkYxLcAeJmN1JUcHGnPqYp5iMPETd7kWdjTn42AoFG7A/5gqih/sSNyVPRUgdw==
 
-"@nextgis/icons@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/icons/-/icons-1.2.1.tgz"
-  integrity sha512-K9S1oLMt0430is/VeCRqb6IZvRDu8BwMlCqPNKacHS8PPEPGiY5vCAN+Q2Ythk7jG802CXVpADTMVgpTGEH4rw==
+"@nextgis/icons@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/icons/-/icons-1.2.2.tgz#1cce0a625dbfe46fc690e7a7ed68efd622604cd5"
+  integrity sha512-NOA4e2le2ONu1TwcTk71kor6kT4GpbhtE0HHkAYZom7wh8R7GBxyPBlnje/Dzyxv8Xi0w9ohaCzCAPSNKCNQlQ==
   dependencies:
-    "@nextgis/paint" "^1.2.1"
+    "@nextgis/paint" "^1.2.2"
 
-"@nextgis/item@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/item/-/item-1.2.1.tgz"
-  integrity sha512-usZThFt+5S4rEbuL9jj9bqcr4BQriHJaOK/MsTPEEw3Hb+6+4zSQkwMy+Q0MA9udyQTZXzfc+4FMdPSfrFJP7g==
+"@nextgis/item@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/item/-/item-1.2.2.tgz#c06756434e2b4735be6b810fe87e98cca175168e"
+  integrity sha512-zvYNIBQKhCso5Jp/hxOSHOBGMMze0bSiCdF/5AgZSBMdsaN/eHT/eujK0HtSJ+5Di0JE7vLtRs4XcnfWiMyKqQ==
   dependencies:
-    "@nextgis/tree" "^1.2.1"
+    "@nextgis/tree" "^1.2.2"
     "@types/events" "^3.0.0"
     events "^3.3.0"
 
-"@nextgis/leaflet-map-adapter@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/leaflet-map-adapter/-/leaflet-map-adapter-1.2.1.tgz"
-  integrity sha512-EYQ3TgoyovnaT29yFzdpNivqGpp25e0iEIVkvNxcLiYxHaG5KgFMyIkmYTuDXzsjwe0lXnIUt1CXhumtb8Kplg==
+"@nextgis/mapboxgl-map-adapter@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/mapboxgl-map-adapter/-/mapboxgl-map-adapter-1.2.2.tgz#ee42fcc245b545b841e0b96f6a7fc9f0cf9197c4"
+  integrity sha512-qXuJrw6tL4UiwYDxJdxssGUKLfjQjLAdO4vuulS21Xug4/6eBy5KfxaO6qA3VBHsVAZbSxMNw8CT8d1qsvApfg==
   dependencies:
-    "@nextgis/paint" "^1.2.1"
-    "@nextgis/utils" "^1.2.1"
-    "@nextgis/webmap" "^1.2.1"
-    "@types/events" "^3.0.0"
-    "@types/leaflet" "^1.7.0"
-    events "^3.3.0"
-    geojson "^0.5.0"
-    leaflet "1.7.1"
-    leaflet.wms "^0.2.0"
-
-"@nextgis/mapboxgl-map-adapter@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/mapboxgl-map-adapter/-/mapboxgl-map-adapter-1.2.1.tgz"
-  integrity sha512-XHwkohyfvGAck2mdvPKPGG1OfaplNZINjSCCEycxGV4+2Kd4UMzdqa6ae2FdYOtwNZQzKAnNFiLxmuYgLsL/Sw==
-  dependencies:
-    "@nextgis/paint" "^1.2.1"
-    "@nextgis/properties-filter" "^1.2.1"
-    "@nextgis/webmap" "^1.2.1"
+    "@nextgis/paint" "^1.2.2"
+    "@nextgis/properties-filter" "^1.2.2"
+    "@nextgis/webmap" "^1.2.2"
     "@types/events" "^3.0.0"
     "@types/mapbox-gl" "^2.1.2"
     events "^3.3.0"
@@ -1521,117 +1506,108 @@
   optionalDependencies:
     canvg "^3.0.7"
 
-"@nextgis/ngw-connector@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/ngw-connector/-/ngw-connector-1.2.1.tgz"
-  integrity sha512-UHdWqBb8ko7J6TYYJyKis0jf9sTSn0Wk1NNxWQVOEznaa+Fh0JL152pxY5WmykE4iKbh1V8ZaP7nuTvyC2zwFg==
+"@nextgis/ngw-connector@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-connector/-/ngw-connector-1.2.2.tgz#fadea409ae75ac552a54913a6d55cc0f1413ab32"
+  integrity sha512-CnCHhm8DjvnKXKndkJaAHPFZ4uSocIwDTsymWgt0CPGIqetGHjCtZ8HnhC1g2XrKuDcfTDfEiMC6L38tPPOXVA==
   dependencies:
-    "@nextgis/cache" "^1.2.1"
-    "@nextgis/cancelable-promise" "^1.2.0"
-    "@nextgis/utils" "^1.2.1"
+    "@nextgis/cache" "^1.2.2"
+    "@nextgis/cancelable-promise" "^1.2.2"
+    "@nextgis/utils" "^1.2.2"
     "@types/events" "^3.0.0"
     events "^3.3.0"
 
-"@nextgis/ngw-kit@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/ngw-kit/-/ngw-kit-1.2.1.tgz"
-  integrity sha512-zlrMrjsiTSK2s45AwfJGS1qqZKvpB4V/DGcqKobP32Kjt/iVtx5QsV6eUqlL3cGbHT6HQYOgFq8g1mReecg3Wg==
+"@nextgis/ngw-kit@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-kit/-/ngw-kit-1.2.2.tgz#e8abe0f500cfeec3003510cebc7fc42f477d3ee7"
+  integrity sha512-eGrHtUdb9FQ8jUqQ89TVywYOWFxHXKu6D72ZCOqGtcQUktBKjTjig/ISI6vxwxi/VAey5NVDx+LtuV9K2UK08g==
   dependencies:
-    "@nextgis/cancelable-promise" "^1.2.0"
-    "@nextgis/item" "^1.2.1"
-    "@nextgis/ngw-connector" "^1.2.1"
-    "@nextgis/properties-filter" "^1.2.1"
-    "@nextgis/qms-kit" "^1.2.1"
-    "@nextgis/utils" "^1.2.1"
-    "@nextgis/webmap" "^1.2.1"
-    "@types/events" "^3.0.0"
-    events "^3.3.0"
-    strict-event-emitter-types "^2.0.0"
-
-"@nextgis/ngw-leaflet@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/ngw-leaflet/-/ngw-leaflet-1.2.1.tgz"
-  integrity sha512-Diuk3p3eL0Whe1nGX6mYdV9mP2Jcx3WUGVrbEBXiHim8TSMoAoNNRtYdKP1N2HaQ2T5zOG/OV5Cxo7jcog+KtA==
-  dependencies:
-    "@nextgis/leaflet-map-adapter" "^1.2.1"
-    "@nextgis/ngw-map" "^1.2.1"
-    leaflet.wms "^0.2.0"
-
-"@nextgis/ngw-map@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/ngw-map/-/ngw-map-1.2.1.tgz"
-  integrity sha512-EXSXzkC0DeOjp8V+w2tai6l5rjRwTSWcZvEmVGHKveCWWEgieZlxOgXvZSQBgqZG/7fcLSIMzo4ezbYHTOYbow==
-  dependencies:
-    "@nextgis/icons" "^1.2.1"
-    "@nextgis/ngw-connector" "^1.2.1"
-    "@nextgis/ngw-kit" "^1.2.1"
-    "@nextgis/qms-kit" "^1.2.1"
-    "@nextgis/utils" "^1.2.1"
-    "@nextgis/webmap" "^1.2.1"
+    "@nextgis/cancelable-promise" "^1.2.2"
+    "@nextgis/item" "^1.2.2"
+    "@nextgis/ngw-connector" "^1.2.2"
+    "@nextgis/properties-filter" "^1.2.2"
+    "@nextgis/qms-kit" "^1.2.2"
+    "@nextgis/utils" "^1.2.2"
+    "@nextgis/webmap" "^1.2.2"
     "@types/events" "^3.0.0"
     events "^3.3.0"
     strict-event-emitter-types "^2.0.0"
 
-"@nextgis/ngw-mapbox@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/ngw-mapbox/-/ngw-mapbox-1.2.1.tgz"
-  integrity sha512-BYWPEShXMyCyj2Yz1nfDjw6KwY3ScX4ZOZPZ7GkWm0e4VTmYagFIlrZzZAudAMEILsFlost70NECQs552j8vbQ==
+"@nextgis/ngw-map@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-map/-/ngw-map-1.2.2.tgz#c9e54c198bbe7dfd6a2ba7db0c17991597558966"
+  integrity sha512-kMtkm7LjtxLpHshpIQfGJEPyqxw6miixEdlBX9aMTxeGu+XMLLVoILKxJ4YCUwI2WhvlXBJIQZt2QJB4ASQ0Pg==
   dependencies:
-    "@nextgis/mapboxgl-map-adapter" "^1.2.1"
-    "@nextgis/ngw-map" "^1.2.1"
+    "@nextgis/icons" "^1.2.2"
+    "@nextgis/ngw-connector" "^1.2.2"
+    "@nextgis/ngw-kit" "^1.2.2"
+    "@nextgis/qms-kit" "^1.2.2"
+    "@nextgis/utils" "^1.2.2"
+    "@nextgis/webmap" "^1.2.2"
+    "@types/events" "^3.0.0"
+    events "^3.3.0"
+    strict-event-emitter-types "^2.0.0"
+
+"@nextgis/ngw-mapbox@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-mapbox/-/ngw-mapbox-1.2.2.tgz#80cc597f3acf4ac6db63dfe397f6d1891ee15ae1"
+  integrity sha512-kqRU7O2XUzN5X0ns+qdb+t5bhekXQ7SHUcaU60QdDnStDdErkR3RTmGX99VPlLkW8OYwTUZYKapJ6YK5+nTyfQ==
+  dependencies:
+    "@nextgis/mapboxgl-map-adapter" "^1.2.2"
+    "@nextgis/ngw-map" "^1.2.2"
     canvg "^3.0.7"
 
-"@nextgis/paint@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/paint/-/paint-1.2.1.tgz"
-  integrity sha512-Hy5/W3ykDkYYrXZW25p5zwwRTcHpWsCz4GFHuc1bz7QmAnFNim/BK8u4dSjFE3pnCMtU0cFhpiVyf65hKBLQAQ==
+"@nextgis/paint@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/paint/-/paint-1.2.2.tgz#f6e88bdb674f0a84af95c3cfd124829be00b266c"
+  integrity sha512-aqOHfIe25fAL0s+/Bw7wGnExke6c30An1UJ169cf6NihdEqAKeXemGT3NsHPFpZKLwNxt7G76p1fzDTTcXCT5g==
   dependencies:
-    "@nextgis/properties-filter" "^1.2.1"
+    "@nextgis/properties-filter" "^1.2.2"
     geojson "^0.5.0"
 
-"@nextgis/progress@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@nextgis/progress/-/progress-1.2.0.tgz#c60a88dfcf0dc3c24ab65ecc365e964760a50d49"
-  integrity sha512-BlW2E+oOHsaOmKrrmjugt0dzJkZxyzy8dHAtwSZTsy0/0FRJ2zYXDccn61NjoM2TT0Wq7s3nieZYCxC9HSdNLQ==
+"@nextgis/progress@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/progress/-/progress-1.2.2.tgz#f69c98b3dfbfb17b5f800dad6660fdf03d3fac18"
+  integrity sha512-MGr6z0Q3MecMw5LC7tWPe9h27cwBmgQ7coExKx8bo2bviOeP7i4BR+kTWhojzaPIwROpIIJ9k9VgjPrqo93wCg==
 
-"@nextgis/properties-filter@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/properties-filter/-/properties-filter-1.2.1.tgz"
-  integrity sha512-jIp9s4sKfoMj/w6FLPUwxZ2XEUgLjwJgL1DVMTA0KGXb2tNbShjt1wcYztxQW35BYHnHF/jETPizn931W7uwyQ==
+"@nextgis/properties-filter@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/properties-filter/-/properties-filter-1.2.2.tgz#dd65439cf6564715e85ea34d034d505c0d515777"
+  integrity sha512-YlIOBKVCz7U/v2MkUxK9K8rMKRtOBQG/AzOUsY2heyNNckHTiDXEyLAgLqOC91Tt2lLLTHxN87xv9GtZDbDNqw==
   dependencies:
-    "@nextgis/utils" "^1.2.1"
+    "@nextgis/utils" "^1.2.2"
     geojson "^0.5.0"
 
-"@nextgis/qms-kit@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/qms-kit/-/qms-kit-1.2.1.tgz"
-  integrity sha512-t9WkB9lwPcuQnINf6YBQ6btDPCshWzLG2LaKbE+807bQULAlTcxx4ro4r2J4aQjkvK1iASATFQIq+k8ErS1PAg==
+"@nextgis/qms-kit@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/qms-kit/-/qms-kit-1.2.2.tgz#9ff3c75032021a40778832aa42d9158997e0680e"
+  integrity sha512-DDA8PZmYepeLPEg5xUTv4R20hWY8J66sz0yE1NykskOB32RyRpCSSYwN7FcLQ/CM1sVqrYJPgdBUSkArodn+/g==
   dependencies:
-    "@nextgis/utils" "^1.2.1"
-    "@nextgis/webmap" "^1.2.1"
+    "@nextgis/utils" "^1.2.2"
+    "@nextgis/webmap" "^1.2.2"
 
-"@nextgis/tree@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/tree/-/tree-1.2.1.tgz"
-  integrity sha512-OPF66fegoG8WH3UiZp7ZohOkv8suo48tGb+QMvuNX3Klvf9obbwo89CdaooK+RLf1s28k+rVI3mtOV9iQvTx0g==
+"@nextgis/tree@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/tree/-/tree-1.2.2.tgz#4a337784b29b0b96f7d223b2428cfe55cd57f1b5"
+  integrity sha512-YWU6wbtrQgYDt6WZmsaU7Nw2a4Y6ZMGnZSrhmqUB9BFSrLDJqaNmIVKkWgDwfTLdFCSi3IltEyCGtwQamG89DQ==
   dependencies:
-    "@nextgis/properties-filter" "^1.2.1"
-    "@nextgis/utils" "^1.2.1"
+    "@nextgis/properties-filter" "^1.2.2"
+    "@nextgis/utils" "^1.2.2"
 
-"@nextgis/utils@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/utils/-/utils-1.2.1.tgz"
-  integrity sha512-aBCIdlpE7TBf8UmOOwSdvdk14m0FqA1ny8yVxiGjAXEmhA1Js7aqTrwCQZcFqnHya4dQcnhP1uxOOdJZtRogCQ==
+"@nextgis/utils@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/utils/-/utils-1.2.2.tgz#fccfec0d9a4bf548ecc1e56413ab3bd180cb9288"
+  integrity sha512-VUXZFXSW03lSC/vTfysE2x/gqzNyq8NeVswh+w6bhDoAbWQQoK49ujrzPv7KcU+2ZG79yYa81w9wsYOKTwR9CQ==
 
-"@nextgis/webmap@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@nextgis/webmap/-/webmap-1.2.1.tgz"
-  integrity sha512-oP9RtpNAW7toiYPALSzUptqVZGNTITEGQuvDnxFujlJcZ1tOCvaX6EaWOzUbdgGn0Yg6G/aWkrItUuX3UIq45Q==
+"@nextgis/webmap@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/webmap/-/webmap-1.2.2.tgz#987c42cb6626ee4125603460da6f09fd75329d0c"
+  integrity sha512-wEg8n0rTCgchHlzue58g/n+zlUljGPhqUe96ybVxEU3Jtru4CPVwf5q35yHuFvrjgpkfTybZxROSOi2zhut5DA==
   dependencies:
-    "@nextgis/cancelable-promise" "^1.2.0"
-    "@nextgis/paint" "^1.2.1"
-    "@nextgis/properties-filter" "^1.2.1"
-    "@nextgis/utils" "^1.2.1"
+    "@nextgis/cancelable-promise" "^1.2.2"
+    "@nextgis/paint" "^1.2.2"
+    "@nextgis/properties-filter" "^1.2.2"
+    "@nextgis/utils" "^1.2.2"
     "@types/events" "^3.0.0"
     events "^3.3.0"
 
@@ -2013,13 +1989,6 @@
   version "0.0.29"
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
-
-"@types/leaflet@^1.7.0":
-  version "1.7.4"
-  resolved "https://registry.npmjs.org/@types/leaflet/-/leaflet-1.7.4.tgz"
-  integrity sha512-a3qYlMwJ62+WRoiDmYODUD4KywA14jP2XohAkAWtELGuMAD3MohZa/MmIvQDqF52xNI9OYaY8BMsL+9z7yf2HQ==
-  dependencies:
-    "@types/geojson" "*"
 
 "@types/mapbox-gl@^2.1.2":
   version "2.3.3"
@@ -2590,15 +2559,6 @@ ajv@^7.0.2:
     json-schema-traverse "^1.0.0"
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
-
-align-text@^0.1.1, align-text@^0.1.3:
-  version "0.1.4"
-  resolved "https://registry.npmjs.org/align-text/-/align-text-0.1.4.tgz"
-  integrity sha1-DNkKVhCT810KmSVsIrcGlDP60Rc=
-  dependencies:
-    kind-of "^3.0.2"
-    longest "^1.0.1"
-    repeat-string "^1.5.2"
 
 alphanum-sort@^1.0.0:
   version "1.0.2"
@@ -3497,11 +3457,6 @@ camelcase@5.3.1, camelcase@^5.0.0, camelcase@^5.3.1:
   resolved "https://registry.npmjs.org/camelcase/-/camelcase-5.3.1.tgz"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
-camelcase@^1.0.2:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/camelcase/-/camelcase-1.2.1.tgz"
-  integrity sha1-m7UwTS4LVmmLLHWLCKPqqdqlijk=
-
 camelcase@^2.0.0:
   version "2.1.1"
   resolved "https://registry.npmjs.org/camelcase/-/camelcase-2.1.1.tgz"
@@ -3555,14 +3510,6 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.npmjs.org/caseless/-/caseless-0.12.0.tgz"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
-
-center-align@^0.1.1:
-  version "0.1.3"
-  resolved "https://registry.npmjs.org/center-align/-/center-align-0.1.3.tgz"
-  integrity sha1-qg0yYptu6XIgBBHL1EYckHvCt60=
-  dependencies:
-    align-text "^0.1.3"
-    lazy-cache "^1.0.3"
 
 chalk@2.4.2, chalk@^2.0.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
@@ -3713,15 +3660,6 @@ clean-stack@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/clean-stack/-/clean-stack-2.2.0.tgz"
   integrity sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==
-
-cliui@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/cliui/-/cliui-2.1.0.tgz"
-  integrity sha1-S0dXYP+AJkx2LDoXGQMukcf+oNE=
-  dependencies:
-    center-align "^0.1.1"
-    right-align "^0.1.1"
-    wordwrap "0.0.2"
 
 cliui@^5.0.0:
   version "5.0.0"
@@ -4405,7 +4343,7 @@ debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1:
   dependencies:
     ms "2.1.2"
 
-decamelize@^1.0.0, decamelize@^1.1.2, decamelize@^1.2.0:
+decamelize@^1.1.2, decamelize@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/decamelize/-/decamelize-1.2.0.tgz"
   integrity sha1-9lNNFRSCabIDUue+4m9QH5oZEpA=
@@ -7486,23 +7424,6 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
-lazy-cache@^1.0.3:
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/lazy-cache/-/lazy-cache-1.0.4.tgz"
-  integrity sha1-odePw6UEdMuAhF07O24dpJpEbo4=
-
-leaflet.wms@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npmjs.org/leaflet.wms/-/leaflet.wms-0.2.0.tgz"
-  integrity sha1-tGfrJKF++nkJhZtG+nJtkS6X0rw=
-  dependencies:
-    uglify-js "^2.7.3"
-
-leaflet@1.7.1:
-  version "1.7.1"
-  resolved "https://registry.npmjs.org/leaflet/-/leaflet-1.7.1.tgz"
-  integrity sha512-/xwPEBidtg69Q3HlqPdU3DnrXQOvQU/CCHA1tcDQVzOwm91YMYaILjNp7L4Eaw5Z4sOYdbBz6koWyibppd8Zqw==
-
 leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/leven/-/leven-3.1.0.tgz"
@@ -7649,11 +7570,6 @@ loglevel@^1.6.8:
   version "1.7.1"
   resolved "https://registry.npmjs.org/loglevel/-/loglevel-1.7.1.tgz"
   integrity sha512-Hesni4s5UkWkwCGJMQGAh71PaLUmKFM60dHvq0zi/vDhhrzuk+4GgNbTXJ12YYQJn6ZKBDNIjYcuQGKudvqrIw==
-
-longest@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/longest/-/longest-1.0.1.tgz"
-  integrity sha1-MKCy2jj3N3DoKUoNIuZiXtd9AJc=
 
 loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
@@ -10198,7 +10114,7 @@ repeat-element@^1.1.2:
   resolved "https://registry.npmjs.org/repeat-element/-/repeat-element-1.1.3.tgz"
   integrity sha512-ahGq0ZnV5m5XtZLMb+vP76kcAM5nkLqk0lpqAuojSKGgQtn4eRi4ZZGm2olo2zKFH+sMsWaqOCW1dqAnOru72g==
 
-repeat-string@^1.5.2, repeat-string@^1.6.1:
+repeat-string@^1.6.1:
   version "1.6.1"
   resolved "https://registry.npmjs.org/repeat-string/-/repeat-string-1.6.1.tgz"
   integrity sha1-jcrkcOHIirwtYA//Sndihtp15jc=
@@ -10387,13 +10303,6 @@ rgbcolor@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/rgbcolor/-/rgbcolor-1.0.1.tgz"
   integrity sha1-1lBezbMEplldom+ktDMHMGd1lF0=
-
-right-align@^0.1.1:
-  version "0.1.3"
-  resolved "https://registry.npmjs.org/right-align/-/right-align-0.1.3.tgz"
-  integrity sha1-YTObci/mo1FWiSENJOFMlhSGE+8=
-  dependencies:
-    align-text "^0.1.1"
 
 rimraf@^2.5.4, rimraf@^2.6.3:
   version "2.7.1"
@@ -10915,7 +10824,7 @@ source-map@^0.4.2:
   dependencies:
     amdefine ">=0.0.4"
 
-source-map@^0.5.0, source-map@^0.5.6, source-map@~0.5.1:
+source-map@^0.5.0, source-map@^0.5.6:
   version "0.5.7"
   resolved "https://registry.npmjs.org/source-map/-/source-map-0.5.7.tgz"
   integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
@@ -11752,21 +11661,6 @@ typescript@^4.1.2:
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.3.4.tgz"
   integrity sha512-uauPG7XZn9F/mo+7MrsRjyvbxFpzemRjKEZXS4AK83oP2KKOJPvb+9cO/gmnv8arWZvhnjVOXz7B49m1l0e9Ew==
 
-uglify-js@^2.7.3:
-  version "2.8.29"
-  resolved "https://registry.npmjs.org/uglify-js/-/uglify-js-2.8.29.tgz"
-  integrity sha1-KcVzMUgFe7Th913zW3qcty5qWd0=
-  dependencies:
-    source-map "~0.5.1"
-    yargs "~3.10.0"
-  optionalDependencies:
-    uglify-to-browserify "~1.0.0"
-
-uglify-to-browserify@~1.0.0:
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz"
-  integrity sha1-bgkk1r2mta/jSeOabWMoUKD4grc=
-
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npmjs.org/unicode-canonical-property-names-ecmascript/-/unicode-canonical-property-names-ecmascript-1.0.4.tgz"
@@ -12258,20 +12152,10 @@ wide-align@^1.1.0:
   dependencies:
     string-width "^1.0.2 || 2"
 
-window-size@0.1.0:
-  version "0.1.0"
-  resolved "https://registry.npmjs.org/window-size/-/window-size-0.1.0.tgz"
-  integrity sha1-VDjNLqk7IC76Ohn+iIeu58lPnJ0=
-
 word-wrap@^1.2.3, word-wrap@~1.2.3:
   version "1.2.3"
   resolved "https://registry.npmjs.org/word-wrap/-/word-wrap-1.2.3.tgz"
   integrity sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
-
-wordwrap@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.npmjs.org/wordwrap/-/wordwrap-0.0.2.tgz"
-  integrity sha1-t5Zpu0LstAn4PVg8rVLKF+qhZD8=
 
 workbox-background-sync@^5.1.4:
   version "5.1.4"
@@ -12568,16 +12452,6 @@ yargs@^15.4.1:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
-
-yargs@~3.10.0:
-  version "3.10.0"
-  resolved "https://registry.npmjs.org/yargs/-/yargs-3.10.0.tgz"
-  integrity sha1-9+572FfdfB0tOMDnTvvWgdFDH9E=
-  dependencies:
-    camelcase "^1.0.2"
-    cliui "^2.1.0"
-    decamelize "^1.0.0"
-    window-size "0.1.0"
 
 yocto-queue@^0.1.0:
   version "0.1.0"
