@@ -93,7 +93,6 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
 
   // add a layer on the map when calendar changes
   useEffect(() => {
-    console.log(activeDate);
     const req: CancelablePromise<void>[] = [];
     if (ngwMap) {
       ngwMap.removeLayer(AIS_LAYER_ID);
@@ -131,7 +130,6 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     }
     return () => {
       req.forEach((x) => x.cancel());
-      req.length = 0;
     };
   }, [activeDate]);
 
