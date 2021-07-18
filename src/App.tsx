@@ -1,6 +1,6 @@
 import './App.sass';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useCookies } from 'react-cookie';
 
 import { LoginContainer } from './components/Login';
@@ -12,14 +12,15 @@ function App() {
   const [showMap, setShowMap] = useState(false);
   const [cookies, setCookies] = useCookies([RMBR_KEY]);
 
-  const logout = () => {
-    setCookies(RMBR_KEY, '');
-  };
   useEffect(() => {
     if (!cookies[RMBR_KEY]) {
       setShowMap(false);
     }
   }, [cookies]);
+
+  const logout = useCallback(() => {
+    setCookies(RMBR_KEY, '');
+  }, []);
 
   return (
     <div className="App">

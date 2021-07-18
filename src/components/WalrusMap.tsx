@@ -30,6 +30,7 @@ import type {
   AisLayerItem,
   DateDict,
 } from '../interfaces';
+import { useCallback } from 'react';
 
 interface WalrusMapProps {
   onLogout: () => void;
@@ -46,7 +47,6 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     () => createAisCalendar(aisLayerItems),
     [aisLayerItems],
   );
-
   const [aisFilter, setAisFilter] = useState<AisFilterInterface>({
     astd_cat: astdCatList,
     iceclass: iceClassList,
@@ -55,14 +55,14 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   });
   const aisFilterData = AIS_DEF_FILTER_DATA;
   const progress = useRef(new Progress());
-  const setupProgress = () => {
+  const setupProgress = useCallback(() => {
     progress.current.emitter.on('start', () => {
       setAisLayerLoading(true);
     });
     progress.current.emitter.on('stop', () => {
       setAisLayerLoading(false);
     });
-  };
+  }, [progress]);
   // load layers list on mount to fill calendar
   useEffect(() => {
     setupProgress();
@@ -133,16 +133,19 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     };
   }, [activeDate]);
 
-  const onDateChange = (date: DateDict | null) => {
-    if (date && date.year && date.month) {
-      if (!objectDeepEqual(activeDate || {}, date)) {
-        setActiveDate(date);
+  const onDateChange = useCallback(
+    (date: DateDict | null) => {
+      if (date && date.year && date.month) {
+        if (!objectDeepEqual(activeDate || {}, date)) {
+          setActiveDate(date);
+        }
       }
-    }
-  };
-  const onFilterChange = (filter: Partial<AisFilterInterface>) => {
+    },
+    [activeDate],
+  );
+  const onFilterChange = useCallback((filter: Partial<AisFilterInterface>) => {
     setAisFilter((prevState) => ({ ...prevState, ...filter }));
-  };
+  }, []);
 
   return (
     <MapContainer

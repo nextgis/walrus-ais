@@ -1,7 +1,6 @@
 import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
-import { generateFilter } from './generateFilter';
 import { getShipidColor } from './getShipidColor';
-import { AIS_DEF_FILTER_DATA, AIS_LAYER_ID } from '../constants';
+import { AIS_LAYER_ID } from '../constants';
 
 import type { FeatureCollection, Point } from 'geojson';
 import type { NgwMap } from '@nextgis/ngw-map';
