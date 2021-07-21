@@ -25,7 +25,7 @@ export function addWalrusLayer({
   return fetchNgwLayerFeatures<Point, WalrusProperties>({
     connector: ngwMap.connector,
     resourceId: walrusLayer,
-    fields: ['dt'],
+    // fields: ['dt'],
     filters: [dateFilter],
     limit: 60000,
     cache: true,
