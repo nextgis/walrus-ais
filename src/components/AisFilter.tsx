@@ -1,7 +1,8 @@
 import type { FunctionComponent } from 'react';
 import { Form } from 'react-bulma-components';
-import type { AisFilterData, AisFilterInterface } from '../interfaces';
+import { AIS_ALIASES } from '../constants';
 import { MultiplySelect } from './MultiplySelect';
+import type { AisFilterData, AisFilterInterface } from '../interfaces';
 
 interface AisFilterProps {
   aisFilter: AisFilterInterface;
@@ -20,7 +21,7 @@ export const AisFilter: FunctionComponent<AisFilterProps> = (props) => {
           <Form.Control>
             <MultiplySelect
               up
-              label="Тип судна"
+              label={AIS_ALIASES.astd_cat}
               items={data.astdCatList}
               value={astd_cat}
               onChange={(astd_cat) => props.onChange({ astd_cat })}
@@ -29,7 +30,7 @@ export const AisFilter: FunctionComponent<AisFilterProps> = (props) => {
           <Form.Control>
             <MultiplySelect
               up
-              label="Ледовый класс"
+              label={AIS_ALIASES.iceclass}
               items={data.iceClassList}
               value={iceclass}
               onChange={(iceclass) => props.onChange({ iceclass })}
@@ -40,7 +41,7 @@ export const AisFilter: FunctionComponent<AisFilterProps> = (props) => {
           <Form.Control>
             <MultiplySelect
               up
-              label="Тоннаж"
+              label={AIS_ALIASES.sizegroup}
               items={data.sizeGroupList}
               value={sizegroup}
               onChange={(sizegroup) => props.onChange({ sizegroup })}
@@ -49,7 +50,7 @@ export const AisFilter: FunctionComponent<AisFilterProps> = (props) => {
           <Form.Control>
             <MultiplySelect
               up
-              label="Качество топлива"
+              label={AIS_ALIASES.fuelq}
               items={data.fuelQList}
               value={fuelq}
               onChange={(fuelq) => props.onChange({ fuelq })}

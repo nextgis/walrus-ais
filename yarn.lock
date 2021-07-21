@@ -1470,10 +1470,10 @@
   dependencies:
     "@nextgis/utils" "^1.2.2"
 
-"@nextgis/cancelable-promise@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/cancelable-promise/-/cancelable-promise-1.2.2.tgz#a2d89eeae6a30cb36e2b6a2515e77bf698fb3ae6"
-  integrity sha512-m/cztrn7baD56r3GFGo4MliMCkYxLcAeJmN1JUcHGnPqYp5iMPETd7kWdjTn42AoFG7A/5gqih/sSNyVPRUgdw==
+"@nextgis/cancelable-promise@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@nextgis/cancelable-promise/-/cancelable-promise-1.2.3.tgz#ab20be4987a6e75746a74cf0310c8b3ae2e68c85"
+  integrity sha512-cuDz3+et6ETshNZxPSh4oAX8/H/Qb1U7N1mvlJWQuuCib+hGk+NAo+vtQPXH9cVSx1m8QjJKiNCBbN04g8rRUw==
 
 "@nextgis/icons@^1.2.2":
   version "1.2.2"
@@ -1491,70 +1491,71 @@
     "@types/events" "^3.0.0"
     events "^3.3.0"
 
-"@nextgis/mapboxgl-map-adapter@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/mapboxgl-map-adapter/-/mapboxgl-map-adapter-1.2.2.tgz#ee42fcc245b545b841e0b96f6a7fc9f0cf9197c4"
-  integrity sha512-qXuJrw6tL4UiwYDxJdxssGUKLfjQjLAdO4vuulS21Xug4/6eBy5KfxaO6qA3VBHsVAZbSxMNw8CT8d1qsvApfg==
+"@nextgis/mapboxgl-map-adapter@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@nextgis/mapboxgl-map-adapter/-/mapboxgl-map-adapter-1.2.3.tgz#1c5771cdf09333d4e6170c29f870cb97916c2fcd"
+  integrity sha512-+zR94/+Zrr+nU7IlpuunScKquJJrzJx4L1ET4YaYZM9WL2jRcZ+mC9XLg81t76ZzFA7BNACOLGpWZfvzAtqqTg==
   dependencies:
     "@nextgis/paint" "^1.2.2"
     "@nextgis/properties-filter" "^1.2.2"
-    "@nextgis/webmap" "^1.2.2"
+    "@nextgis/webmap" "^1.2.3"
     "@types/events" "^3.0.0"
-    "@types/mapbox-gl" "^2.1.2"
+    "@types/polylabel" "^1.0.5"
     events "^3.3.0"
-    mapbox-gl "1.13.0"
+    maplibre-gl "^1.15.2"
+    polylabel "^1.1.0"
   optionalDependencies:
     canvg "^3.0.7"
 
-"@nextgis/ngw-connector@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/ngw-connector/-/ngw-connector-1.2.2.tgz#fadea409ae75ac552a54913a6d55cc0f1413ab32"
-  integrity sha512-CnCHhm8DjvnKXKndkJaAHPFZ4uSocIwDTsymWgt0CPGIqetGHjCtZ8HnhC1g2XrKuDcfTDfEiMC6L38tPPOXVA==
+"@nextgis/ngw-connector@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-connector/-/ngw-connector-1.2.3.tgz#a06c33d29671e7be1732e69ae1f0ce240184a173"
+  integrity sha512-GMiGnGlw1LGS5Xcoee+4ovMClwFUcw9QnCCZuwJFV1Tuwfa7pxhR8v1VhuySe6CC4q2QEtJIeT1ppEPKF6OSeg==
   dependencies:
     "@nextgis/cache" "^1.2.2"
-    "@nextgis/cancelable-promise" "^1.2.2"
+    "@nextgis/cancelable-promise" "^1.2.3"
     "@nextgis/utils" "^1.2.2"
     "@types/events" "^3.0.0"
     events "^3.3.0"
 
-"@nextgis/ngw-kit@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/ngw-kit/-/ngw-kit-1.2.2.tgz#e8abe0f500cfeec3003510cebc7fc42f477d3ee7"
-  integrity sha512-eGrHtUdb9FQ8jUqQ89TVywYOWFxHXKu6D72ZCOqGtcQUktBKjTjig/ISI6vxwxi/VAey5NVDx+LtuV9K2UK08g==
+"@nextgis/ngw-kit@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-kit/-/ngw-kit-1.2.3.tgz#7c90b7dac91ed4476e2646620330d5d516105384"
+  integrity sha512-mpyGLIC0EK3By1Fc/t7QLBEf80kco8TjQqGYvTD/T3hcskf6H2Hc4mhG1VvaCaHZPofuOhkT8i6sPaA0BHXxcA==
   dependencies:
-    "@nextgis/cancelable-promise" "^1.2.2"
+    "@nextgis/cancelable-promise" "^1.2.3"
     "@nextgis/item" "^1.2.2"
-    "@nextgis/ngw-connector" "^1.2.2"
+    "@nextgis/ngw-connector" "^1.2.3"
     "@nextgis/properties-filter" "^1.2.2"
-    "@nextgis/qms-kit" "^1.2.2"
+    "@nextgis/qms-kit" "^1.2.3"
     "@nextgis/utils" "^1.2.2"
-    "@nextgis/webmap" "^1.2.2"
+    "@nextgis/webmap" "^1.2.3"
     "@types/events" "^3.0.0"
     events "^3.3.0"
     strict-event-emitter-types "^2.0.0"
 
-"@nextgis/ngw-map@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/ngw-map/-/ngw-map-1.2.2.tgz#c9e54c198bbe7dfd6a2ba7db0c17991597558966"
-  integrity sha512-kMtkm7LjtxLpHshpIQfGJEPyqxw6miixEdlBX9aMTxeGu+XMLLVoILKxJ4YCUwI2WhvlXBJIQZt2QJB4ASQ0Pg==
+"@nextgis/ngw-map@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-map/-/ngw-map-1.2.3.tgz#30c04b4367b6191b71dca891aae22438409c3d73"
+  integrity sha512-IhiSGWW0YLivj2aGpFKkYVZ15Wop/Rwg5RBPvj8CB3qAzdvTdj9G54SNfTT6Hyrq3WbgKvuBt2/1r3La8BdkIA==
   dependencies:
     "@nextgis/icons" "^1.2.2"
-    "@nextgis/ngw-connector" "^1.2.2"
-    "@nextgis/ngw-kit" "^1.2.2"
-    "@nextgis/qms-kit" "^1.2.2"
+    "@nextgis/ngw-connector" "^1.2.3"
+    "@nextgis/ngw-kit" "^1.2.3"
+    "@nextgis/qms-kit" "^1.2.3"
     "@nextgis/utils" "^1.2.2"
-    "@nextgis/webmap" "^1.2.2"
+    "@nextgis/webmap" "^1.2.3"
     "@types/events" "^3.0.0"
     events "^3.3.0"
     strict-event-emitter-types "^2.0.0"
 
-"@nextgis/ngw-mapbox@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/ngw-mapbox/-/ngw-mapbox-1.2.2.tgz#80cc597f3acf4ac6db63dfe397f6d1891ee15ae1"
-  integrity sha512-kqRU7O2XUzN5X0ns+qdb+t5bhekXQ7SHUcaU60QdDnStDdErkR3RTmGX99VPlLkW8OYwTUZYKapJ6YK5+nTyfQ==
+"@nextgis/ngw-mapbox@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-mapbox/-/ngw-mapbox-1.2.3.tgz#4226d99b27fb4ecd6c2222d611f36215b52e6e00"
+  integrity sha512-oHCEGSei9IcvipLQVgDWeDDxlRa30TY3iQ8oRG2YNaMtVDSAiArItaUek6YcsbAwBfnaN1YPO0nuRJdc4DcrrQ==
   dependencies:
-    "@nextgis/mapboxgl-map-adapter" "^1.2.2"
-    "@nextgis/ngw-map" "^1.2.2"
+    "@nextgis/mapboxgl-map-adapter" "^1.2.3"
+    "@nextgis/ngw-map" "^1.2.3"
     canvg "^3.0.7"
 
 "@nextgis/paint@^1.2.2":
@@ -1578,13 +1579,13 @@
     "@nextgis/utils" "^1.2.2"
     geojson "^0.5.0"
 
-"@nextgis/qms-kit@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/qms-kit/-/qms-kit-1.2.2.tgz#9ff3c75032021a40778832aa42d9158997e0680e"
-  integrity sha512-DDA8PZmYepeLPEg5xUTv4R20hWY8J66sz0yE1NykskOB32RyRpCSSYwN7FcLQ/CM1sVqrYJPgdBUSkArodn+/g==
+"@nextgis/qms-kit@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@nextgis/qms-kit/-/qms-kit-1.2.3.tgz#7e303eab92051634175ab0d09e89c9511ee817fd"
+  integrity sha512-f5x0feo1eTyNXGCm9y+wSGU2gQnh4w+v15lG/Q1pFPoa4Ve+/jpy70nkEXfXy1FFqwJcuEKrkgSIs1kIBPqIsQ==
   dependencies:
     "@nextgis/utils" "^1.2.2"
-    "@nextgis/webmap" "^1.2.2"
+    "@nextgis/webmap" "^1.2.3"
 
 "@nextgis/tree@^1.2.2":
   version "1.2.2"
@@ -1599,12 +1600,12 @@
   resolved "https://registry.yarnpkg.com/@nextgis/utils/-/utils-1.2.2.tgz#fccfec0d9a4bf548ecc1e56413ab3bd180cb9288"
   integrity sha512-VUXZFXSW03lSC/vTfysE2x/gqzNyq8NeVswh+w6bhDoAbWQQoK49ujrzPv7KcU+2ZG79yYa81w9wsYOKTwR9CQ==
 
-"@nextgis/webmap@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/webmap/-/webmap-1.2.2.tgz#987c42cb6626ee4125603460da6f09fd75329d0c"
-  integrity sha512-wEg8n0rTCgchHlzue58g/n+zlUljGPhqUe96ybVxEU3Jtru4CPVwf5q35yHuFvrjgpkfTybZxROSOi2zhut5DA==
+"@nextgis/webmap@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@nextgis/webmap/-/webmap-1.2.3.tgz#7c70e5275b08fe7f060eb02c088b86a181c3ed4d"
+  integrity sha512-56dEAGnOs22hkCYCgz7IrU1F6/66n01C+MCgClYxaaKX/IpQy0Yi8mjPBVyasPlh81y0wwmk8QR4sD+wzCCWsg==
   dependencies:
-    "@nextgis/cancelable-promise" "^1.2.2"
+    "@nextgis/cancelable-promise" "^1.2.3"
     "@nextgis/paint" "^1.2.2"
     "@nextgis/properties-filter" "^1.2.2"
     "@nextgis/utils" "^1.2.2"
@@ -1920,9 +1921,9 @@
   resolved "https://registry.npmjs.org/@types/events/-/events-3.0.0.tgz"
   integrity sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
 
-"@types/geojson@*":
+"@types/geojson@^7946.0.8":
   version "7946.0.8"
-  resolved "https://registry.npmjs.org/@types/geojson/-/geojson-7946.0.8.tgz"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.8.tgz#30744afdb385e2945e22f3b033f897f76b1f12ca"
   integrity sha512-1rkryxURpr6aWP7R786/UQOkJ3PcpQiWkAXBmdWc7ryFWqN6a4xfK7BtjXvFBKO9LjQ+MWQSWxYeZX1OApnArA==
 
 "@types/glob@^7.1.1":
@@ -1990,13 +1991,6 @@
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/mapbox-gl@^2.1.2":
-  version "2.3.3"
-  resolved "https://registry.npmjs.org/@types/mapbox-gl/-/mapbox-gl-2.3.3.tgz"
-  integrity sha512-PN7ejo+l3YSdKDTjvtvPifGX9C86NeyRTSvZEGhWb9qkc0e3/CF7gkDmTWhNmZiou7GdKsCKstSvcaZDs2NXUw==
-  dependencies:
-    "@types/geojson" "*"
-
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.npmjs.org/@types/minimatch/-/minimatch-3.0.3.tgz"
@@ -2021,6 +2015,11 @@
   version "4.0.0"
   resolved "https://registry.npmjs.org/@types/parse-json/-/parse-json-4.0.0.tgz"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
+
+"@types/polylabel@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@types/polylabel/-/polylabel-1.0.5.tgz#9262f269de36f1e9248aeb9dee0ee9d10065e043"
+  integrity sha512-gnaNmo1OJiYNBFAZMZdqLZ3hKx2ee4ksAzqhKWBxuQ61PmhINHMcvIqsGmyCD1WFKCkwRt9NFhMSmKE6AgYY+w==
 
 "@types/prettier@^2.0.0":
   version "2.2.1"
@@ -7658,10 +7657,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-mapbox-gl@1.13.0:
-  version "1.13.0"
-  resolved "https://registry.npmjs.org/mapbox-gl/-/mapbox-gl-1.13.0.tgz"
-  integrity sha512-g8zlzuJxYJqbOPXT19/UBYpVrcefBQ06F/Cbj0fyEfFnFesDcU3cFTxd75/FZ6Upx2ZEjCsD61CHxrcxZidVpA==
+maplibre-gl@^1.15.2:
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/maplibre-gl/-/maplibre-gl-1.15.2.tgz#7fb47868b62455af916c090903f2154394450f9c"
+  integrity sha512-uPeV530apb4JfX3cRFfE+awFnbcJTOnCv2QvY4mw4huiInbybElWYkNzTs324YLSADq0f4bidRoYcR81ho3aLA==
   dependencies:
     "@mapbox/geojson-rewind" "^0.5.0"
     "@mapbox/geojson-types" "^1.0.2"
@@ -8784,6 +8783,13 @@ pnp-webpack-plugin@1.6.4:
   integrity sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==
   dependencies:
     ts-pnp "^1.1.6"
+
+polylabel@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/polylabel/-/polylabel-1.1.0.tgz#9483e64fc7a12a49f43e07e7a06752214ed2a8e7"
+  integrity sha512-bxaGcA40sL3d6M4hH72Z4NdLqxpXRsCFk8AITYg6x1rn1Ei3izf00UMLklerBZTO49aPA3CYrIwVulx2Bce2pA==
+  dependencies:
+    tinyqueue "^2.0.3"
 
 portfinder@^1.0.26:
   version "1.0.28"

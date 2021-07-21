@@ -1,10 +1,11 @@
 import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
+import { AIS_ALIASES, AIS_LAYER_ID } from '../constants';
 import { getShipidColor } from './getShipidColor';
-import { AIS_LAYER_ID } from '../constants';
+import { createPopupContent } from './createPopupContent';
 
 import type { FeatureCollection, Point } from 'geojson';
 import type { NgwMap } from '@nextgis/ngw-map';
-import type { Expression } from '@nextgis/paint';
+import type { Expression, Paint } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { AisProperties, AstdCat } from '../interfaces';
@@ -48,17 +49,36 @@ export function addAisLayer({
       type: 'FeatureCollection',
       features,
     };
+
+    const paint: Paint = {
+      color,
+      stroke: true,
+      strokeColor: 'white',
+      opacity: 1,
+      radius: 4,
+    };
     ngwMap
       .addGeoJsonLayer({
         id: AIS_LAYER_ID,
         data,
         order: 10,
-        paint: {
-          color,
-          stroke: true,
-          strokeColor: 'white',
-          opacity: 1,
-          radius: 4,
+        paint,
+        selectedPaint: { ...paint, radius: 7 },
+        selectable: true,
+        popupOnSelect: true,
+        popupOptions: {
+          createPopupContent: createPopupContent({
+            resource,
+            aliases: AIS_ALIASES,
+            getProp: {
+              shipid: (val: string) => {
+                const elem = document.createElement('div');
+                const color = getShipidColor(val);
+                elem.innerHTML = `${val} <span style="display: inline-block;background-color: ${color}; width: 10px; height: 10px; border-radius: 50%;"></span>`;
+                return elem;
+              },
+            },
+          }),
         },
       })
       .then(() => {

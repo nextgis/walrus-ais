@@ -1,17 +1,17 @@
-import { useEffect, useState, useRef, useMemo } from 'react';
+import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 
 import Progress from '@nextgis/progress';
 import { objectDeepEqual } from '@nextgis/utils';
 import {
-  AIS_DEF_FILTER_DATA,
-  AIS_LAYER_ID,
   fuelQList,
   astdCatList,
   iceClassList,
+  AIS_LAYER_ID,
   sizeGroupList,
-  WALRUS_LAYER_ID,
+  AIS_DEF_FILTER_DATA,
 } from '../constants';
 import { MapContainer } from '../NgwMap/Map';
+import { clearLayers, closePopups } from '../utils/clearLayers';
 import { addAisLayer } from '../utils/addAisLayer';
 import { generateFilter } from '../utils/generateFilter';
 import { fetchAisFeatures } from '../utils/fetchAisFeatures';
@@ -30,7 +30,6 @@ import type {
   AisLayerItem,
   DateDict,
 } from '../interfaces';
-import { useCallback } from 'react';
 
 interface WalrusMapProps {
   onLogout: () => void;
@@ -95,8 +94,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   useEffect(() => {
     const req: CancelablePromise<void>[] = [];
     if (ngwMap) {
-      ngwMap.removeLayer(AIS_LAYER_ID);
-      ngwMap.removeLayer(WALRUS_LAYER_ID);
+      clearLayers(ngwMap);
       if (activeDate) {
         const activeAisLayerItem = findAisLayerByDate(
           aisLayerItems,
@@ -143,14 +141,19 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     },
     [activeDate],
   );
-  const onFilterChange = useCallback((filter: Partial<AisFilterInterface>) => {
-    setAisFilter((prevState) => ({ ...prevState, ...filter }));
-  }, []);
+  const onFilterChange = useCallback(
+    (filter: Partial<AisFilterInterface>) => {
+      ngwMap && closePopups(ngwMap);
+      setAisFilter((prevState) => ({ ...prevState, ...filter }));
+    },
+    [ngwMap],
+  );
 
   return (
     <MapContainer
       id="map"
-      qmsId={448}
+      // qmsId={448}
+      osm
       bounds={[41.3607, 67.9801, 66.5899, 70.6804]}
       whenCreated={setNgwMap}
     >

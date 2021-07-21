@@ -2,13 +2,14 @@ import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 import { WALRUS_LAYER_ID } from '../constants';
 import { walrusLayer } from '../config';
+import { createPopupContent } from './createPopupContent';
+import { getMonthDateRange } from './getMonthDateRange';
 
 import type { FeatureCollection, Point } from 'geojson';
 import type { NgwMap } from '@nextgis/ngw-map';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { DateDict, WalrusProperties } from '../interfaces';
-import { getMonthDateRange } from './getMonthDateRange';
 
 export function addWalrusLayer({
   ngwMap,
@@ -44,9 +45,11 @@ export function addWalrusLayer({
         stroke: 1,
         strokeColor: 'white',
       }),
+      selectable: true,
+      popupOnSelect: true,
+      popupOptions: {
+        createPopupContent: createPopupContent({ resource: walrusLayer }),
+      },
     });
-    // .then(() => {
-    //   ngwMap.propertiesFilter(WALRUS_LAYER_ID, filter);
-    // });
   });
 }

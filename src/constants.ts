@@ -1,4 +1,4 @@
-import type { AisFilterData } from './interfaces';
+import type { AisFilterData, AisProperties } from './interfaces';
 
 export const RMBR_KEY = 'ngw-login';
 
@@ -6,6 +6,17 @@ export const NULL_STR = '---';
 
 export const AIS_LAYER_ID = 'ais-layer';
 export const WALRUS_LAYER_ID = 'walrus-layer';
+
+export const AIS_ALIASES: Record<keyof AisProperties, string> = {
+  astd_cat: 'Тип судна',
+  datetime: 'Дата',
+  fid: 'fid',
+  flagname: 'Флаг',
+  fuelq: 'Качество топлива',
+  iceclass: 'Ледовый класс',
+  shipid: 'ID судна',
+  sizegroup: 'Тоннаж',
+};
 
 export const MONTHS = [
   'январь',
