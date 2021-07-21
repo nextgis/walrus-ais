@@ -1,5 +1,5 @@
 import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
-import { getIcon } from '@nextgis/icons';
+import { getIcon, IconOptions } from '@nextgis/icons';
 import { WALRUS_LAYER_ID } from '../constants';
 import { walrusLayer } from '../config';
 import { createPopupContent } from './createPopupContent';
@@ -34,17 +34,19 @@ export function addWalrusLayer({
       type: 'FeatureCollection',
       features,
     };
+    const iconOpt: IconOptions = {
+      color: 'black',
+      shape: 'marker',
+      size: 14,
+      stroke: 1,
+      strokeColor: 'white',
+    };
     ngwMap.addGeoJsonLayer({
       id: WALRUS_LAYER_ID,
       data,
       order: 20,
-      paint: getIcon({
-        color: 'black',
-        shape: 'marker',
-        size: 14,
-        stroke: 1,
-        strokeColor: 'white',
-      }),
+      paint: getIcon(iconOpt),
+      selectedPaint: getIcon({ ...iconOpt, size: 20 }),
       selectable: true,
       popupOnSelect: true,
       popupOptions: {
