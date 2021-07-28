@@ -27,12 +27,7 @@ export interface AisFilterInterface {
   fuelq: FuelQ[];
 }
 
-export interface AisFilterData {
-  readonly astdCatList: AstdCat[];
-  readonly iceClassList: IceClass[];
-  readonly sizeGroupList: SizeGroup[];
-  readonly fuelQList: FuelQ[];
-}
+export type AisFilterData = Readonly<AisFilterInterface>;
 
 export type AisCalendar = { [year: string]: string[] };
 

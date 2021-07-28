@@ -22,7 +22,7 @@ export const AisFilter: FunctionComponent<AisFilterProps> = (props) => {
             <MultiplySelect
               up
               label={AIS_ALIASES.astd_cat}
-              items={data.astdCatList}
+              items={data.astd_cat}
               value={astd_cat}
               onChange={(astd_cat) => props.onChange({ astd_cat })}
             />
@@ -31,7 +31,7 @@ export const AisFilter: FunctionComponent<AisFilterProps> = (props) => {
             <MultiplySelect
               up
               label={AIS_ALIASES.iceclass}
-              items={data.iceClassList}
+              items={data.iceclass}
               value={iceclass}
               onChange={(iceclass) => props.onChange({ iceclass })}
             />
@@ -42,7 +42,7 @@ export const AisFilter: FunctionComponent<AisFilterProps> = (props) => {
             <MultiplySelect
               up
               label={AIS_ALIASES.sizegroup}
-              items={data.sizeGroupList}
+              items={data.sizegroup}
               value={sizegroup}
               onChange={(sizegroup) => props.onChange({ sizegroup })}
             />
@@ -51,7 +51,7 @@ export const AisFilter: FunctionComponent<AisFilterProps> = (props) => {
             <MultiplySelect
               up
               label={AIS_ALIASES.fuelq}
-              items={data.fuelQList}
+              items={data.fuelq}
               value={fuelq}
               onChange={(fuelq) => props.onChange({ fuelq })}
             />

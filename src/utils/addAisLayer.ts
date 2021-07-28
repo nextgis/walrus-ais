@@ -1,5 +1,5 @@
 import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
-import { AIS_ALIASES, AIS_LAYER_ID } from '../constants';
+import { AIS_ALIASES, AIS_DEF_FILTER_DATA, AIS_LAYER_ID } from '../constants';
 import { getShipidColor } from './getShipidColor';
 import { createPopupContent } from './createPopupContent';
 
@@ -9,6 +9,7 @@ import type { Expression, Paint } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { AisProperties, AstdCat } from '../interfaces';
+import { generateFilter } from './generateFilter';
 
 export function addAisLayer({
   ngwMap,
@@ -24,7 +25,7 @@ export function addAisLayer({
     resourceId: resource,
     fields: ['shipid', 'astd_cat', 'iceclass', 'sizegroup', 'fuelq'],
     // load optimization. Only for full filter values
-    // filters: generateFilter(AIS_DEF_FILTER_DATA),
+    filters: generateFilter(AIS_DEF_FILTER_DATA),
     limit: 60000,
     cache: true,
   }).then((features) => {

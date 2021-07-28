@@ -73,8 +73,8 @@ export const sizeGroupList = [
 ];
 
 export const AIS_DEF_FILTER_DATA: AisFilterData = {
-  astdCatList,
-  iceClassList,
-  sizeGroupList,
-  fuelQList,
+  astd_cat: astdCatList,
+  iceclass: iceClassList,
+  sizegroup: sizeGroupList,
+  fuelq: fuelQList,
 };

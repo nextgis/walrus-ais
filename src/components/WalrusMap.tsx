@@ -2,14 +2,7 @@ import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 
 import Progress from '@nextgis/progress';
 import { objectDeepEqual } from '@nextgis/utils';
-import {
-  fuelQList,
-  astdCatList,
-  iceClassList,
-  AIS_LAYER_ID,
-  sizeGroupList,
-  AIS_DEF_FILTER_DATA,
-} from '../constants';
+import { AIS_LAYER_ID, AIS_DEF_FILTER_DATA } from '../constants';
 import { MapContainer } from '../NgwMap/Map';
 import { clearLayers, closePopups } from '../utils/clearLayers';
 import { addAisLayer } from '../utils/addAisLayer';
@@ -46,12 +39,8 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     () => createAisCalendar(aisLayerItems),
     [aisLayerItems],
   );
-  const [aisFilter, setAisFilter] = useState<AisFilterInterface>({
-    astd_cat: astdCatList,
-    iceclass: iceClassList,
-    sizegroup: sizeGroupList,
-    fuelq: fuelQList,
-  });
+  const [aisFilter, setAisFilter] =
+    useState<AisFilterInterface>(AIS_DEF_FILTER_DATA);
   const aisFilterData = AIS_DEF_FILTER_DATA;
   const progress = useRef(new Progress());
   const setupProgress = useCallback(() => {
