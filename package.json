@@ -5,6 +5,7 @@
   "dependencies": {
     "@iconify/iconify": "^2.0.3",
     "@iconify/icons-mdi": "^1.1.15",
+    "@nextgis/eslint-config": "^1.2.0",
     "@nextgis/icons": "^1.2.2",
     "@nextgis/ngw-mapbox": "^1.2.3",
     "@nextgis/progress": "^1.2.2",
@@ -27,9 +28,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.ts{,x}",
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
@@ -48,11 +49,13 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^6.2.0",
     "@iconify/react": "^1.1.4",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-tsdoc": "^0.2.14",
     "node-sass": "^5.0.0",
     "prettier": "^2.3.2"
   }

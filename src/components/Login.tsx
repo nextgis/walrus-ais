@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import Logo from '../images/walrus-logo-detail.svg';
 
@@ -130,7 +130,7 @@ export function LoginContainer<
     }
   }, []);
 
-  function makeLogin() {
+  const makeLogin = useCallback(() => {
     setLoading(true);
     const auth = { login, password };
     connector
@@ -146,7 +146,7 @@ export function LoginContainer<
         setCookies(RMBR_KEY, '');
         setLoading(false);
       });
-  }
+  }, [rmbrLogin]);
 
   const formProps = {
     login,
