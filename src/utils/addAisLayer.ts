@@ -1,18 +1,18 @@
 import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
-import { AIS_ALIASES, AIS_LAYER_ID } from '../constants';
+import { AIS_ALIASES } from '../constants';
 import { getShipidColor } from './getShipidColor';
+import { secondsToDateString } from './secondsToDateString';
 import { createPopupContent } from './createPopupContent';
 
-import type { FeatureCollection, Point } from 'geojson';
+import type { FeatureCollection, Point, LineString } from 'geojson';
 import type { NgwMap } from '@nextgis/ngw-map';
 import type { VectorAdapterLayerType } from '@nextgis/webmap';
 import type { Expression, Paint, CirclePaint, PathPaint } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type CancelablePromise from '@nextgis/cancelable-promise';
-import type { AisPointProperties, AstdCat } from '../interfaces';
-import { secondsToDateString } from './secondsToDateString';
+import type { AstdCat, AisProperties } from '../interfaces';
 
-export function addAisLayer({
+export function addAisLayer<P extends AisProperties = AisProperties>({
   id,
   type,
   ngwMap,
@@ -24,14 +24,13 @@ export function addAisLayer({
   ngwMap: NgwMap;
   resource: number;
   type: VectorAdapterLayerType;
-  dataFilter: PropertiesFilter;
-  styleFilter: PropertiesFilter;
+  dataFilter: PropertiesFilter<P>;
+  styleFilter: PropertiesFilter<P>;
 }): CancelablePromise<void> {
-  return fetchNgwLayerFeatures<Point, AisPointProperties>({
+  return fetchNgwLayerFeatures<Point | LineString, P>({
     connector: ngwMap.connector,
     resourceId: resource,
     // fields: ['shipid', 'astd_cat', 'iceclass', 'sizegroup', 'fuelq'],
-    // load optimization. Only for full filter values
     filters: dataFilter,
     limit: 60000,
     cache: true,
@@ -43,7 +42,7 @@ export function addAisLayer({
       let p: keyof typeof f.properties;
       for (p in f.properties) {
         if (f.properties[p] === null) {
-          f.properties[p] = '';
+          (f.properties as Record<any, any>)[p] = '';
         }
       }
 
@@ -60,7 +59,7 @@ export function addAisLayer({
     }
     // last item is default value
     color.push('gray');
-    const data: FeatureCollection<Point, AisPointProperties> = {
+    const data: FeatureCollection<Point | LineString, P> = {
       type: 'FeatureCollection',
       features,
     };
@@ -113,7 +112,6 @@ export function addAisLayer({
         },
       })
       .then(() => {
-        console.log(features);
         ngwMap.propertiesFilter(id, styleFilter);
       });
   });

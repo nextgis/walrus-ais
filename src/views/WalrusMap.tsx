@@ -10,20 +10,22 @@ import {
 import { MapContainer } from '../NgwMap/Map';
 import { clearLayers, closePopups } from '../utils/clearLayers';
 import { addAisLayer } from '../utils/addAisLayer';
+import { addWalrusLayer } from '../utils/addWalrusLayer';
 import { generateFilter } from '../utils/generateFilter';
 import { fetchAisFeatures } from '../utils/fetchAisFeatures';
 import { createAisCalendar } from '../utils/createAisCalendar';
 import { findAisLayerByDate } from '../utils/findAisLayerByDate';
-import { addWalrusLayer } from '../utils/addWalrusLayer';
-import { LogoutMapBtnControl } from '../components/LogoutMapBtnControl';
 import { PanelMapControl } from '../components/PanelMapControl';
 import { MapLoadingControl } from '../components/MapLoadingControl';
+import { LogoutMapBtnControl } from '../components/LogoutMapBtnControl';
 
 import type { NgwMap } from '@nextgis/ngw-map';
 import type CancelablePromise from '@nextgis/cancelable-promise';
 import type {
-  AisCalendar,
   AisFilterInterface,
+  AisPointProperties,
+  AisTrackProperties,
+  AisCalendar,
   AisLayerItem,
   DateDict,
 } from '../interfaces';
@@ -102,7 +104,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
         if (activeAisLayerItem) {
           progress.current.addLoading();
           req.push(
-            addAisLayer({
+            addAisLayer<AisPointProperties>({
               id: AIS_LAYER_ID,
               ngwMap,
               type: 'point',
@@ -114,7 +116,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
         }
         progress.current.addLoading();
         req.push(
-          addAisLayer({
+          addAisLayer<AisTrackProperties>({
             id: AIS_TRACK_LAYER_ID,
             ngwMap,
             type: 'line',
