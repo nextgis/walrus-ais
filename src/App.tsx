@@ -3,10 +3,10 @@ import './App.sass';
 import { useState, useCallback } from 'react';
 import { useCookies } from 'react-cookie';
 
-import { LoginContainer } from './components/Login';
+import { LoginContainer } from './views/Login';
 import { RMBR_KEY } from './constants';
 import { useEffect } from 'react';
-import { WalrusMap } from './components/WalrusMap';
+import { WalrusMap } from './views/WalrusMap';
 
 function App() {
   const [showMap, setShowMap] = useState(false);

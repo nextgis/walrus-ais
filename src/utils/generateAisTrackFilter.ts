@@ -1,19 +1,12 @@
 import { getMonthDateRange } from './getMonthDateRange';
 
 import type { PropertiesFilter } from '@nextgis/properties-filter';
-import type {
-  AisFilterData,
-  AisTrackProperties,
-  DateDict,
-} from '../interfaces';
+import type { AisTrackProperties, DateDict } from '../interfaces';
 
 export function generateAisTrackFilter(
-  props: AisFilterData,
   date: DateDict,
 ): PropertiesFilter<AisTrackProperties> {
-  const filter: PropertiesFilter<AisTrackProperties> = [
-    // generateFilter(props)
-  ];
+  const filter: PropertiesFilter<AisTrackProperties> = [];
   const [from, to] = getMonthDateRange(date).map((x) => x / 1000);
 
   const middleFilter: PropertiesFilter<AisTrackProperties> = [

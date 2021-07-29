@@ -66,7 +66,7 @@ export const MultiplySelect: FunctionComponent<MultiplySelectProps> = (
                   setValues(values_);
                 }}
               >
-                {x}
+                {x || 'Not set'}
               </Form.Checkbox>
             </Form.Control>
           </Form.Field>

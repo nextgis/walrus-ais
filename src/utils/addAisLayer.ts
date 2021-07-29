@@ -40,6 +40,13 @@ export function addAisLayer({
     const color: Expression = ['match', ['get', 'shipid']];
     const shipidList: string[] = [];
     for (const f of features) {
+      let p: keyof typeof f.properties;
+      for (p in f.properties) {
+        if (f.properties[p] === null) {
+          f.properties[p] = '';
+        }
+      }
+
       const shipid = f.properties['shipid'];
       const astdCat = f.properties['astd_cat'];
       if (!shipidList.includes(shipid)) {
@@ -106,7 +113,8 @@ export function addAisLayer({
         },
       })
       .then(() => {
-        ngwMap.propertiesFilter(AIS_LAYER_ID, styleFilter);
+        console.log(features);
+        ngwMap.propertiesFilter(id, styleFilter);
       });
   });
 }

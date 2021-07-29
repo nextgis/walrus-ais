@@ -68,6 +68,7 @@ export const iceClassList = [
   'FS Ice Class 1B',
   'FS Ice Class 1C',
   'FS Ice Class II',
+  '',
 ];
 
 export const fuelQList = ['0', '1', '2', '3', '4', '5', '6'];

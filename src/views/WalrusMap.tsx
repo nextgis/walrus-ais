@@ -15,9 +15,9 @@ import { fetchAisFeatures } from '../utils/fetchAisFeatures';
 import { createAisCalendar } from '../utils/createAisCalendar';
 import { findAisLayerByDate } from '../utils/findAisLayerByDate';
 import { addWalrusLayer } from '../utils/addWalrusLayer';
-import { LogoutMapBtnControl } from './LogoutMapBtnControl';
-import { PanelMapControl } from './PanelMapControl';
-import { MapLoadingControl } from './MapLoadingControl';
+import { LogoutMapBtnControl } from '../components/LogoutMapBtnControl';
+import { PanelMapControl } from '../components/PanelMapControl';
+import { MapLoadingControl } from '../components/MapLoadingControl';
 
 import type { NgwMap } from '@nextgis/ngw-map';
 import type CancelablePromise from '@nextgis/cancelable-promise';
@@ -80,9 +80,12 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
 
   // set filter for current ais layer
   useEffect(() => {
-    if (ngwMap && ngwMap.getLayer(AIS_LAYER_ID)) {
-      ngwMap.propertiesFilter(AIS_LAYER_ID, generateFilter(aisFilter));
-    }
+    const filter = generateFilter(aisFilter);
+    [AIS_LAYER_ID, AIS_TRACK_LAYER_ID].forEach((x) => {
+      if (ngwMap) {
+        ngwMap.propertiesFilter(x, filter);
+      }
+    });
   }, [aisFilter]);
 
   // add a layer on the map when calendar changes
@@ -104,18 +107,19 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
               ngwMap,
               type: 'point',
               resource: activeAisLayerItem.resource,
-              dataFilter: generateFilter(AIS_DEF_FILTER_DATA),
+              dataFilter: [], // generateFilter(AIS_DEF_FILTER_DATA),
               styleFilter,
             }),
           );
         }
+        progress.current.addLoading();
         req.push(
           addAisLayer({
             id: AIS_TRACK_LAYER_ID,
             ngwMap,
             type: 'line',
             resource: aisTrackResource,
-            dataFilter: generateAisTrackFilter(AIS_DEF_FILTER_DATA, activeDate),
+            dataFilter: generateAisTrackFilter(activeDate),
             styleFilter,
           }),
         );
