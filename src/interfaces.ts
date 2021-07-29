@@ -32,14 +32,25 @@ export type AisFilterData = Readonly<AisFilterInterface>;
 export type AisCalendar = { [year: string]: string[] };
 
 export interface AisProperties {
-  astd_cat: AstdCat; // "Offshore supply ships"
-  datetime: string; // "2020-12-01 00:01:22";
-  fid: string; // "_0"
+  astd_cat: AstdCat;
   flagname: string; // "Russia"
   fuelq: string; // '0';
-  iceclass: IceClass; // 'FS Ice Class 1A';
+  iceclass: IceClass;
   shipid: string; // '244';
-  sizegroup: SizeGroup; // '5000 - 9999 GT';
+  sizegroup: SizeGroup;
+}
+
+export interface AisPointProperties extends AisProperties {
+  /** date string "2020-12-01 00:01:22" */
+  datetime: string;
+  fid: string; // "_0"
+}
+
+export interface AisTrackProperties extends AisProperties {
+  /** timestamp in second */
+  date_begin: number;
+  /** timestamp in second */
+  date_end: number;
 }
 
 export interface WalrusProperties {

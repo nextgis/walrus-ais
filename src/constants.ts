@@ -1,13 +1,23 @@
-import type { AisFilterData, AisProperties } from './interfaces';
+import type {
+  AisFilterData,
+  AisPointProperties,
+  AisTrackProperties,
+} from './interfaces';
 
 export const RMBR_KEY = 'ngw-login';
 
 export const NULL_STR = '---';
 
 export const AIS_LAYER_ID = 'ais-layer';
+export const AIS_TRACK_LAYER_ID = 'ais-track-layer';
 export const WALRUS_LAYER_ID = 'walrus-layer';
 
-export const AIS_ALIASES: Record<keyof AisProperties, string> = {
+export const AIS_ALIASES: Record<
+  keyof (AisPointProperties & AisTrackProperties),
+  string
+> = {
+  date_begin: 'Начало',
+  date_end: 'Конец',
   astd_cat: 'Тип судна',
   datetime: 'Дата',
   fid: 'fid',

@@ -2,7 +2,11 @@ import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 
 import Progress from '@nextgis/progress';
 import { objectDeepEqual } from '@nextgis/utils';
-import { AIS_LAYER_ID, AIS_DEF_FILTER_DATA } from '../constants';
+import {
+  AIS_LAYER_ID,
+  AIS_DEF_FILTER_DATA,
+  AIS_TRACK_LAYER_ID,
+} from '../constants';
 import { MapContainer } from '../NgwMap/Map';
 import { clearLayers, closePopups } from '../utils/clearLayers';
 import { addAisLayer } from '../utils/addAisLayer';
@@ -23,6 +27,8 @@ import type {
   AisLayerItem,
   DateDict,
 } from '../interfaces';
+import { aisTrackResource } from '../config';
+import { generateAisTrackFilter } from '../utils/generateAisTrackFilter';
 
 interface WalrusMapProps {
   onLogout: () => void;
@@ -89,16 +95,31 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
           aisLayerItems,
           activeDate,
         );
+        const styleFilter = generateFilter(aisFilter);
         if (activeAisLayerItem) {
           progress.current.addLoading();
           req.push(
             addAisLayer({
+              id: AIS_LAYER_ID,
               ngwMap,
+              type: 'point',
               resource: activeAisLayerItem.resource,
-              filter: generateFilter(aisFilter),
+              dataFilter: generateFilter(AIS_DEF_FILTER_DATA),
+              styleFilter,
             }),
           );
         }
+        req.push(
+          addAisLayer({
+            id: AIS_TRACK_LAYER_ID,
+            ngwMap,
+            type: 'line',
+            resource: aisTrackResource,
+            dataFilter: generateAisTrackFilter(AIS_DEF_FILTER_DATA, activeDate),
+            styleFilter,
+          }),
+        );
+
         progress.current.addLoading();
         req.push(
           addWalrusLayer({

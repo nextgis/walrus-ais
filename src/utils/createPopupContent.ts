@@ -20,8 +20,8 @@ export function createPopupContent<
     html.className = 'table is-fullwidth';
     html.style.marginBottom = '0';
     const feature = props.feature;
+    const res = await connector.getResource(resource);
     if (feature && feature.properties) {
-      const res = await connector.getResource(resource);
       if (res && res.feature_layer) {
         const fields = res.feature_layer.fields;
 

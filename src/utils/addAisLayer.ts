@@ -1,31 +1,38 @@
 import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
-import { AIS_ALIASES, AIS_DEF_FILTER_DATA, AIS_LAYER_ID } from '../constants';
+import { AIS_ALIASES, AIS_LAYER_ID } from '../constants';
 import { getShipidColor } from './getShipidColor';
 import { createPopupContent } from './createPopupContent';
 
 import type { FeatureCollection, Point } from 'geojson';
 import type { NgwMap } from '@nextgis/ngw-map';
-import type { Expression, Paint } from '@nextgis/paint';
+import type { VectorAdapterLayerType } from '@nextgis/webmap';
+import type { Expression, Paint, CirclePaint, PathPaint } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type CancelablePromise from '@nextgis/cancelable-promise';
-import type { AisProperties, AstdCat } from '../interfaces';
-import { generateFilter } from './generateFilter';
+import type { AisPointProperties, AstdCat } from '../interfaces';
+import { secondsToDateString } from './secondsToDateString';
 
 export function addAisLayer({
+  id,
+  type,
   ngwMap,
   resource,
-  filter,
+  dataFilter,
+  styleFilter,
 }: {
+  id: string;
   ngwMap: NgwMap;
   resource: number;
-  filter: PropertiesFilter;
+  type: VectorAdapterLayerType;
+  dataFilter: PropertiesFilter;
+  styleFilter: PropertiesFilter;
 }): CancelablePromise<void> {
-  return fetchNgwLayerFeatures<Point, AisProperties>({
+  return fetchNgwLayerFeatures<Point, AisPointProperties>({
     connector: ngwMap.connector,
     resourceId: resource,
-    fields: ['shipid', 'astd_cat', 'iceclass', 'sizegroup', 'fuelq'],
+    // fields: ['shipid', 'astd_cat', 'iceclass', 'sizegroup', 'fuelq'],
     // load optimization. Only for full filter values
-    filters: generateFilter(AIS_DEF_FILTER_DATA),
+    filters: dataFilter,
     limit: 60000,
     cache: true,
   }).then((features) => {
@@ -46,25 +53,35 @@ export function addAisLayer({
     }
     // last item is default value
     color.push('gray');
-    const data: FeatureCollection<Point, AisProperties> = {
+    const data: FeatureCollection<Point, AisPointProperties> = {
       type: 'FeatureCollection',
       features,
     };
 
-    const paint: Paint = {
-      color,
-      stroke: true,
-      strokeColor: 'white',
-      opacity: 1,
-      radius: 4,
-    };
+    let paint: Paint = {};
+    let selectedPaint: Paint = {};
+    if (type === 'point') {
+      paint = {
+        color,
+        stroke: true,
+        strokeColor: 'white',
+        opacity: 1,
+        radius: 4,
+      };
+      selectedPaint = { ...(paint as CirclePaint), radius: 7 };
+    } else {
+      paint = { color };
+      selectedPaint = { ...(paint as PathPaint), weight: 3 };
+    }
+
     ngwMap
       .addGeoJsonLayer({
-        id: AIS_LAYER_ID,
+        id,
         data,
         order: 10,
         paint,
-        selectedPaint: { ...paint, radius: 7 },
+        type,
+        selectedPaint,
         selectable: true,
         popupOnSelect: true,
         popupOptions: {
@@ -75,15 +92,21 @@ export function addAisLayer({
               shipid: (val: string) => {
                 const elem = document.createElement('div');
                 const color = getShipidColor(val);
-                elem.innerHTML = `${val} <span style="display: inline-block;background-color: ${color}; width: 10px; height: 10px; border-radius: 50%;"></span>`;
+                elem.innerHTML = `${val} <span style="display: inline-block;
+                                                      background-color: ${color};
+                                                      width: 10px;
+                                                      height: 10px;
+                                                      border-radius: 50%;"></span>`;
                 return elem;
               },
+              date_begin: secondsToDateString,
+              date_end: secondsToDateString,
             },
           }),
         },
       })
       .then(() => {
-        ngwMap.propertiesFilter(AIS_LAYER_ID, filter);
+        ngwMap.propertiesFilter(AIS_LAYER_ID, styleFilter);
       });
   });
 }
