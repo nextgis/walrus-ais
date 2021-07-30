@@ -31,6 +31,7 @@ import type {
 } from '../interfaces';
 import { aisTrackResource } from '../config';
 import { generateAisTrackFilter } from '../utils/generateAisTrackFilter';
+import { AisLayersToggleMapControl } from '../components/AisLayersToggleMapControl';
 
 interface WalrusMapProps {
   onLogout: () => void;
@@ -43,6 +44,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   const [aisLayerLoading, setAisLayerLoading] = useState(false);
   const [aisLayerItems, setAisLayerItems] = useState<AisLayerItem[]>([]);
   const [activeDate, setActiveDate] = useState<DateDict | null>(null);
+  const [trackLayerVisibility, setTrackLayerVisibility] = useState(true);
   const calendar: AisCalendar = useMemo(
     () => createAisCalendar(aisLayerItems),
     [aisLayerItems],
@@ -165,6 +167,16 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     [ngwMap],
   );
 
+  useEffect(() => {
+    if (ngwMap) {
+      ngwMap.toggleLayer(AIS_TRACK_LAYER_ID, trackLayerVisibility);
+    }
+  }, [trackLayerVisibility, ngwMap]);
+
+  const toggleAisLayer = (status?: boolean) => {
+    setTrackLayerVisibility(!!status);
+  };
+
   return (
     <MapContainer
       id="map"
@@ -174,15 +186,20 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
       whenCreated={setNgwMap}
     >
       <LogoutMapBtnControl onClick={props.onLogout} />
+      <AisLayersToggleMapControl
+        position="top-right"
+        onClick={toggleAisLayer}
+        status={trackLayerVisibility}
+      />
       <PanelMapControl
         {...{
-          calendar,
+          onDateChange,
           activeDate,
-          aisLayerItems,
+          calendar,
           aisFilter,
+          aisLayerItems,
           aisFilterData,
           onFilterChange,
-          onDateChange,
         }}
       />
       <MapLoadingControl loading={aisLayerLoading} />
