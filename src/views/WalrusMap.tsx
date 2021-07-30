@@ -122,6 +122,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
             id: AIS_TRACK_LAYER_ID,
             ngwMap,
             type: 'line',
+            visibility: trackLayerVisibility,
             resource: aisTrackResource,
             dataFilter: generateAisTrackFilter(activeDate),
             styleFilter,

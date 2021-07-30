@@ -1,4 +1,5 @@
 import { fetchNgwLayerFeatures } from '@nextgis/ngw-kit';
+import { defined } from '@nextgis/utils';
 import { AIS_ALIASES } from '../constants';
 import { getShipidColor } from './getShipidColor';
 import { secondsToDateString } from './secondsToDateString';
@@ -17,12 +18,14 @@ export function addAisLayer<P extends AisProperties = AisProperties>({
   type,
   ngwMap,
   resource,
+  visibility,
   dataFilter,
   styleFilter,
 }: {
   id: string;
   ngwMap: NgwMap;
   resource: number;
+  visibility?: boolean;
   type: VectorAdapterLayerType;
   dataFilter: PropertiesFilter<P>;
   styleFilter: PropertiesFilter<P>;
@@ -83,10 +86,11 @@ export function addAisLayer<P extends AisProperties = AisProperties>({
     ngwMap
       .addGeoJsonLayer({
         id,
-        data,
-        order: 10,
-        paint,
         type,
+        data,
+        order: type === 'point' ? 11 : 10,
+        paint,
+        visibility,
         selectedPaint,
         selectable: true,
         popupOnSelect: true,
@@ -113,6 +117,9 @@ export function addAisLayer<P extends AisProperties = AisProperties>({
       })
       .then(() => {
         ngwMap.propertiesFilter(id, styleFilter);
+        if (defined(visibility)) {
+          ngwMap.toggleLayer(id, visibility);
+        }
       });
   });
 }
