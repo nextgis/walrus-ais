@@ -63,9 +63,10 @@ export class AisLayerToggle implements MapControl {
   }
 
   private getIcon(): string {
-    const str = ICONS.find(
+    const cur = ICONS.findIndex(
       (x) => x.point === this.point && x.track === this.track,
     );
-    return str?.icon || '';
+    const { icon } = ICONS[(cur + 1) % ICONS.length];
+    return icon;
   }
 }
