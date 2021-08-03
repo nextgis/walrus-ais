@@ -1463,42 +1463,42 @@
   resolved "https://registry.npmjs.org/@mapbox/whoots-js/-/whoots-js-3.1.0.tgz"
   integrity sha512-Es6WcD0nO5l+2BOQS4uLfNPYQaNDfbot3X1XUoloz+x0mPDS3eeORZJl06HXjwBG1fOGwCRnzK88LMdxKRrd6Q==
 
-"@nextgis/cache@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/cache/-/cache-1.2.2.tgz#4af390e22c71ea1dbbbf7abe087ac35d52b190f3"
-  integrity sha512-WDKFxglIn4j/QH13dcRUMl7/0WHWelTDrtRJ3SBHpCXM2v0nVpH2KHg5hGOkqQyE0F8/4e37Ei9nDWoN6+WW/w==
+"@nextgis/cache@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/cache/-/cache-1.2.8.tgz#d99dc41f8a64090e28ee4ba86f838b043e735c63"
+  integrity sha512-kz3gWKFVxIyBrguMGTUGo+XzqtYkAK/UjRe3dRlVOKoRld2EFXcWoQBzHTd3pE+cvFdCGqIJ1EEJ514MeFCihQ==
   dependencies:
-    "@nextgis/utils" "^1.2.2"
+    "@nextgis/utils" "^1.2.8"
 
 "@nextgis/cancelable-promise@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@nextgis/cancelable-promise/-/cancelable-promise-1.2.3.tgz#ab20be4987a6e75746a74cf0310c8b3ae2e68c85"
   integrity sha512-cuDz3+et6ETshNZxPSh4oAX8/H/Qb1U7N1mvlJWQuuCib+hGk+NAo+vtQPXH9cVSx1m8QjJKiNCBbN04g8rRUw==
 
-"@nextgis/icons@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/icons/-/icons-1.2.2.tgz#1cce0a625dbfe46fc690e7a7ed68efd622604cd5"
-  integrity sha512-NOA4e2le2ONu1TwcTk71kor6kT4GpbhtE0HHkAYZom7wh8R7GBxyPBlnje/Dzyxv8Xi0w9ohaCzCAPSNKCNQlQ==
+"@nextgis/icons@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/icons/-/icons-1.2.8.tgz#70acdfb749e23bec6b8dbcb553272fdd44da9dc7"
+  integrity sha512-tErJ9QPbIRjQMggcOXbcbVw7w/gyG1KiJUSwQC1uSLeLrBXJoLv1Mal31rBSXph/CutybjEQyqrS6Ba5kuCL9Q==
   dependencies:
-    "@nextgis/paint" "^1.2.2"
+    "@nextgis/paint" "^1.2.8"
 
-"@nextgis/item@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/item/-/item-1.2.2.tgz#c06756434e2b4735be6b810fe87e98cca175168e"
-  integrity sha512-zvYNIBQKhCso5Jp/hxOSHOBGMMze0bSiCdF/5AgZSBMdsaN/eHT/eujK0HtSJ+5Di0JE7vLtRs4XcnfWiMyKqQ==
+"@nextgis/item@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/item/-/item-1.2.8.tgz#f11106cb59f8f033ed8ed731d9fb40c86988c114"
+  integrity sha512-dr1OAi+Nu9AUZZj2xctMC8vY9TiQgpYKubJiDtsgSctleDU6SBnLQT7GxUtV4CdDze8y3fZQA7hzV1c/ggBBVQ==
   dependencies:
-    "@nextgis/tree" "^1.2.2"
+    "@nextgis/tree" "^1.2.8"
     "@types/events" "^3.0.0"
     events "^3.3.0"
 
-"@nextgis/mapboxgl-map-adapter@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@nextgis/mapboxgl-map-adapter/-/mapboxgl-map-adapter-1.2.3.tgz#1c5771cdf09333d4e6170c29f870cb97916c2fcd"
-  integrity sha512-+zR94/+Zrr+nU7IlpuunScKquJJrzJx4L1ET4YaYZM9WL2jRcZ+mC9XLg81t76ZzFA7BNACOLGpWZfvzAtqqTg==
+"@nextgis/mapboxgl-map-adapter@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/mapboxgl-map-adapter/-/mapboxgl-map-adapter-1.2.8.tgz#126ccc4df298f4a63b7b157421f2251f8e3a64b5"
+  integrity sha512-CMZZWOI6qEybr59JF31LdbvV3ldZVU8U9d9m5pKiw8lNunngiELNX68J+N9At2uUSiaKlthoDWbxn5q5kkqhqQ==
   dependencies:
-    "@nextgis/paint" "^1.2.2"
-    "@nextgis/properties-filter" "^1.2.2"
-    "@nextgis/webmap" "^1.2.3"
+    "@nextgis/paint" "^1.2.8"
+    "@nextgis/properties-filter" "^1.2.8"
+    "@nextgis/webmap" "^1.2.8"
     "@types/events" "^3.0.0"
     "@types/polylabel" "^1.0.5"
     events "^3.3.0"
@@ -1507,63 +1507,63 @@
   optionalDependencies:
     canvg "^3.0.7"
 
-"@nextgis/ngw-connector@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@nextgis/ngw-connector/-/ngw-connector-1.2.3.tgz#a06c33d29671e7be1732e69ae1f0ce240184a173"
-  integrity sha512-GMiGnGlw1LGS5Xcoee+4ovMClwFUcw9QnCCZuwJFV1Tuwfa7pxhR8v1VhuySe6CC4q2QEtJIeT1ppEPKF6OSeg==
+"@nextgis/ngw-connector@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-connector/-/ngw-connector-1.2.8.tgz#21305d5b5e207f7911abdaccd5cb99297f5bd4b5"
+  integrity sha512-JxyfpPSac3Lz+ydd/JjN0o8Oek5/EpHsVYaSpBwR0E/DdQx5WNxtmwYBjt32HOHNqhXYUxyZ1R+fOeqwI+LJjw==
   dependencies:
-    "@nextgis/cache" "^1.2.2"
+    "@nextgis/cache" "^1.2.8"
     "@nextgis/cancelable-promise" "^1.2.3"
-    "@nextgis/utils" "^1.2.2"
+    "@nextgis/utils" "^1.2.8"
     "@types/events" "^3.0.0"
     events "^3.3.0"
 
-"@nextgis/ngw-kit@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@nextgis/ngw-kit/-/ngw-kit-1.2.3.tgz#7c90b7dac91ed4476e2646620330d5d516105384"
-  integrity sha512-mpyGLIC0EK3By1Fc/t7QLBEf80kco8TjQqGYvTD/T3hcskf6H2Hc4mhG1VvaCaHZPofuOhkT8i6sPaA0BHXxcA==
+"@nextgis/ngw-kit@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-kit/-/ngw-kit-1.2.8.tgz#3b8f01dbd44c078301631bfd5ec4aa7171bf2418"
+  integrity sha512-Jcpa5gVxZ2EbOrCMMgijwL3cN6LeJK+JmgTS+UBXN/vC59Pwa82SGvGXcK6fxi8Esy6lSomGhKZn1OnCsOz1KA==
   dependencies:
     "@nextgis/cancelable-promise" "^1.2.3"
-    "@nextgis/item" "^1.2.2"
-    "@nextgis/ngw-connector" "^1.2.3"
-    "@nextgis/properties-filter" "^1.2.2"
-    "@nextgis/qms-kit" "^1.2.3"
-    "@nextgis/utils" "^1.2.2"
-    "@nextgis/webmap" "^1.2.3"
+    "@nextgis/item" "^1.2.8"
+    "@nextgis/ngw-connector" "^1.2.8"
+    "@nextgis/properties-filter" "^1.2.8"
+    "@nextgis/qms-kit" "^1.2.8"
+    "@nextgis/utils" "^1.2.8"
+    "@nextgis/webmap" "^1.2.8"
     "@types/events" "^3.0.0"
     events "^3.3.0"
     strict-event-emitter-types "^2.0.0"
 
-"@nextgis/ngw-map@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@nextgis/ngw-map/-/ngw-map-1.2.3.tgz#30c04b4367b6191b71dca891aae22438409c3d73"
-  integrity sha512-IhiSGWW0YLivj2aGpFKkYVZ15Wop/Rwg5RBPvj8CB3qAzdvTdj9G54SNfTT6Hyrq3WbgKvuBt2/1r3La8BdkIA==
+"@nextgis/ngw-map@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-map/-/ngw-map-1.2.8.tgz#5493ec406f7970e2e8ccbec06ea67fab67f28ff2"
+  integrity sha512-o7KURlq1+tJFswe+URA5BuC/A6pTFjDz1It6KFTiYUBO++jcgH6hiiBMaa7WGVvfePdXsk0sx2rqgRb20ZaqvQ==
   dependencies:
-    "@nextgis/icons" "^1.2.2"
-    "@nextgis/ngw-connector" "^1.2.3"
-    "@nextgis/ngw-kit" "^1.2.3"
-    "@nextgis/qms-kit" "^1.2.3"
-    "@nextgis/utils" "^1.2.2"
-    "@nextgis/webmap" "^1.2.3"
+    "@nextgis/icons" "^1.2.8"
+    "@nextgis/ngw-connector" "^1.2.8"
+    "@nextgis/ngw-kit" "^1.2.8"
+    "@nextgis/qms-kit" "^1.2.8"
+    "@nextgis/utils" "^1.2.8"
+    "@nextgis/webmap" "^1.2.8"
     "@types/events" "^3.0.0"
     events "^3.3.0"
     strict-event-emitter-types "^2.0.0"
 
-"@nextgis/ngw-mapbox@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@nextgis/ngw-mapbox/-/ngw-mapbox-1.2.3.tgz#4226d99b27fb4ecd6c2222d611f36215b52e6e00"
-  integrity sha512-oHCEGSei9IcvipLQVgDWeDDxlRa30TY3iQ8oRG2YNaMtVDSAiArItaUek6YcsbAwBfnaN1YPO0nuRJdc4DcrrQ==
+"@nextgis/ngw-mapbox@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-mapbox/-/ngw-mapbox-1.2.8.tgz#be6d4625a0f67f07a8efde191edd11bc1c00bbaf"
+  integrity sha512-T8sJLZEpPelPzuZgnGmQy3hCck4jW6xwapfFBFrCEJREnLrjRtFtJ24R8GIaeM4/f4NEsgkDh3pfhSvtt97IgQ==
   dependencies:
-    "@nextgis/mapboxgl-map-adapter" "^1.2.3"
-    "@nextgis/ngw-map" "^1.2.3"
+    "@nextgis/mapboxgl-map-adapter" "^1.2.8"
+    "@nextgis/ngw-map" "^1.2.8"
     canvg "^3.0.7"
 
-"@nextgis/paint@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/paint/-/paint-1.2.2.tgz#f6e88bdb674f0a84af95c3cfd124829be00b266c"
-  integrity sha512-aqOHfIe25fAL0s+/Bw7wGnExke6c30An1UJ169cf6NihdEqAKeXemGT3NsHPFpZKLwNxt7G76p1fzDTTcXCT5g==
+"@nextgis/paint@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/paint/-/paint-1.2.8.tgz#76e2e95ce677494103c292c7df06d768137f7dee"
+  integrity sha512-fk9BxOBVzhKuveQje9gNhVgnd1gBY1jAFPfYzDBiVUbNsf0t/VDFkeGvtG1/em9YvPgibB/F3zbJjNcKtElIAg==
   dependencies:
-    "@nextgis/properties-filter" "^1.2.2"
+    "@nextgis/properties-filter" "^1.2.8"
     geojson "^0.5.0"
 
 "@nextgis/progress@^1.2.2":
@@ -1571,44 +1571,44 @@
   resolved "https://registry.yarnpkg.com/@nextgis/progress/-/progress-1.2.2.tgz#f69c98b3dfbfb17b5f800dad6660fdf03d3fac18"
   integrity sha512-MGr6z0Q3MecMw5LC7tWPe9h27cwBmgQ7coExKx8bo2bviOeP7i4BR+kTWhojzaPIwROpIIJ9k9VgjPrqo93wCg==
 
-"@nextgis/properties-filter@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/properties-filter/-/properties-filter-1.2.2.tgz#dd65439cf6564715e85ea34d034d505c0d515777"
-  integrity sha512-YlIOBKVCz7U/v2MkUxK9K8rMKRtOBQG/AzOUsY2heyNNckHTiDXEyLAgLqOC91Tt2lLLTHxN87xv9GtZDbDNqw==
+"@nextgis/properties-filter@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/properties-filter/-/properties-filter-1.2.8.tgz#fb1a03e8f6ec2ea7c32f7417d2d366023c3ec8b2"
+  integrity sha512-+akH/2ciCQYAxH5kufWGJhD0Gm/kWDaqobA8qVA2PaD/mw7M8g/88rG7B3QFJffm58F9ytflWUCXd/N4yrtQTQ==
   dependencies:
-    "@nextgis/utils" "^1.2.2"
+    "@nextgis/utils" "^1.2.8"
     geojson "^0.5.0"
 
-"@nextgis/qms-kit@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@nextgis/qms-kit/-/qms-kit-1.2.3.tgz#7e303eab92051634175ab0d09e89c9511ee817fd"
-  integrity sha512-f5x0feo1eTyNXGCm9y+wSGU2gQnh4w+v15lG/Q1pFPoa4Ve+/jpy70nkEXfXy1FFqwJcuEKrkgSIs1kIBPqIsQ==
+"@nextgis/qms-kit@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/qms-kit/-/qms-kit-1.2.8.tgz#723f93144a33c6bc608bdbd0583d7cd46425cea9"
+  integrity sha512-unhAiNXAcPMOWeLLzKXWCRN2HOJhN4OBdMZSzy1Nbn8QN8xt7B+jMr0VfYlURuy4o0AGxQ5yDEKloM2inEKQRQ==
   dependencies:
-    "@nextgis/utils" "^1.2.2"
-    "@nextgis/webmap" "^1.2.3"
+    "@nextgis/utils" "^1.2.8"
+    "@nextgis/webmap" "^1.2.8"
 
-"@nextgis/tree@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/tree/-/tree-1.2.2.tgz#4a337784b29b0b96f7d223b2428cfe55cd57f1b5"
-  integrity sha512-YWU6wbtrQgYDt6WZmsaU7Nw2a4Y6ZMGnZSrhmqUB9BFSrLDJqaNmIVKkWgDwfTLdFCSi3IltEyCGtwQamG89DQ==
+"@nextgis/tree@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/tree/-/tree-1.2.8.tgz#2beaf384be5557da55493c678290e531ffd8dcee"
+  integrity sha512-81eHlzMdwtELecIaXb8iRBuTE97GVj3WVRuCPTPkj/H15iEr9iX1zigCWeCtfdxcXtqxxpRsm66px3R7+imwSA==
   dependencies:
-    "@nextgis/properties-filter" "^1.2.2"
-    "@nextgis/utils" "^1.2.2"
+    "@nextgis/properties-filter" "^1.2.8"
+    "@nextgis/utils" "^1.2.8"
 
-"@nextgis/utils@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@nextgis/utils/-/utils-1.2.2.tgz#fccfec0d9a4bf548ecc1e56413ab3bd180cb9288"
-  integrity sha512-VUXZFXSW03lSC/vTfysE2x/gqzNyq8NeVswh+w6bhDoAbWQQoK49ujrzPv7KcU+2ZG79yYa81w9wsYOKTwR9CQ==
+"@nextgis/utils@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/utils/-/utils-1.2.8.tgz#26961bf812d2df3f63713f9f5e1ffc356557b230"
+  integrity sha512-3h4Bf2Wmf4EL1lc8Hi/4qivSPwrxLQtW/aClt304TjlApuoou2sfYImDNKwoz5Cf+E2D02FhcAF4Exq1V8wMOQ==
 
-"@nextgis/webmap@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@nextgis/webmap/-/webmap-1.2.3.tgz#7c70e5275b08fe7f060eb02c088b86a181c3ed4d"
-  integrity sha512-56dEAGnOs22hkCYCgz7IrU1F6/66n01C+MCgClYxaaKX/IpQy0Yi8mjPBVyasPlh81y0wwmk8QR4sD+wzCCWsg==
+"@nextgis/webmap@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@nextgis/webmap/-/webmap-1.2.8.tgz#7cd5d7ee7e47b94d167dda3d549fc8d9dddb9e84"
+  integrity sha512-oIMhBTwni7LdcXambbjdi6Yj3Uhw30HSn3l6uRYo1A4DC3385Qf8Uwv+oQ18HGFD/IDgZxhHqnxutwLBdfsvPg==
   dependencies:
     "@nextgis/cancelable-promise" "^1.2.3"
-    "@nextgis/paint" "^1.2.2"
-    "@nextgis/properties-filter" "^1.2.2"
-    "@nextgis/utils" "^1.2.2"
+    "@nextgis/paint" "^1.2.8"
+    "@nextgis/properties-filter" "^1.2.8"
+    "@nextgis/utils" "^1.2.8"
     "@types/events" "^3.0.0"
     events "^3.3.0"
 

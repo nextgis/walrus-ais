@@ -31,6 +31,11 @@ export type AisFilterData = Readonly<AisFilterInterface>;
 
 export type AisCalendar = { [year: string]: string[] };
 
+export interface AisVisibility {
+  point: boolean;
+  track: boolean;
+}
+
 export interface AisProperties {
   astd_cat: AstdCat;
   flagname: string; // "Russia"

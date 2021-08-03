@@ -28,10 +28,11 @@ import type {
   AisCalendar,
   AisLayerItem,
   DateDict,
+  AisVisibility,
 } from '../interfaces';
 import { aisTrackResource } from '../config';
 import { generateAisTrackFilter } from '../utils/generateAisTrackFilter';
-import { AisLayersToggleMapControl } from '../components/AisLayersToggleMapControl';
+import { AisLayersToggleMapControl } from '../components/AisLayersToggleMapControl/AisLayersToggleMapControl';
 
 interface WalrusMapProps {
   onLogout: () => void;
@@ -45,6 +46,7 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   const [aisLayerItems, setAisLayerItems] = useState<AisLayerItem[]>([]);
   const [activeDate, setActiveDate] = useState<DateDict | null>(null);
   const [trackLayerVisibility, setTrackLayerVisibility] = useState(true);
+  const [pointLayerVisibility, setPointLayerVisibility] = useState(true);
   const calendar: AisCalendar = useMemo(
     () => createAisCalendar(aisLayerItems),
     [aisLayerItems],
@@ -96,39 +98,44 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   useEffect(() => {
     const req: CancelablePromise<void>[] = [];
     if (ngwMap) {
-      clearLayers(ngwMap);
       if (activeDate) {
         const activeAisLayerItem = findAisLayerByDate(
           aisLayerItems,
           activeDate,
         );
         const styleFilter = generateFilter(aisFilter);
-        if (activeAisLayerItem) {
+        if (
+          activeAisLayerItem &&
+          pointLayerVisibility &&
+          !ngwMap.getLayer(AIS_LAYER_ID)
+        ) {
           progress.current.addLoading();
           req.push(
             addAisLayer<AisPointProperties>({
               id: AIS_LAYER_ID,
               ngwMap,
               type: 'point',
+              visibility: pointLayerVisibility,
               resource: activeAisLayerItem.resource,
               dataFilter: [], // generateFilter(AIS_DEF_FILTER_DATA),
               styleFilter,
             }),
           );
         }
-        progress.current.addLoading();
-        req.push(
-          addAisLayer<AisTrackProperties>({
-            id: AIS_TRACK_LAYER_ID,
-            ngwMap,
-            type: 'line',
-            visibility: trackLayerVisibility,
-            resource: aisTrackResource,
-            dataFilter: generateAisTrackFilter(activeDate),
-            styleFilter,
-          }),
-        );
-
+        if (trackLayerVisibility && !ngwMap.getLayer(AIS_TRACK_LAYER_ID)) {
+          progress.current.addLoading();
+          req.push(
+            addAisLayer<AisTrackProperties>({
+              id: AIS_TRACK_LAYER_ID,
+              ngwMap,
+              type: 'line',
+              visibility: trackLayerVisibility,
+              resource: aisTrackResource,
+              dataFilter: generateAisTrackFilter(activeDate),
+              styleFilter,
+            }),
+          );
+        }
         progress.current.addLoading();
         req.push(
           addWalrusLayer({
@@ -148,10 +155,11 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     return () => {
       req.forEach((x) => x.cancel());
     };
-  }, [activeDate]);
+  }, [activeDate, trackLayerVisibility, pointLayerVisibility]);
 
   const onDateChange = useCallback(
     (date: DateDict | null) => {
+      ngwMap && clearLayers(ngwMap);
       if (date && date.year && date.month) {
         if (!objectDeepEqual(activeDate || {}, date)) {
           setActiveDate(date);
@@ -171,11 +179,13 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
   useEffect(() => {
     if (ngwMap) {
       ngwMap.toggleLayer(AIS_TRACK_LAYER_ID, trackLayerVisibility);
+      ngwMap.toggleLayer(AIS_LAYER_ID, pointLayerVisibility);
     }
-  }, [trackLayerVisibility, ngwMap]);
+  }, [trackLayerVisibility, pointLayerVisibility, ngwMap]);
 
-  const toggleAisLayer = (status?: boolean) => {
-    setTrackLayerVisibility(!!status);
+  const toggleAisLayer = ({ point, track }: AisVisibility) => {
+    setTrackLayerVisibility(!!track);
+    setPointLayerVisibility(!!point);
   };
 
   return (
@@ -190,7 +200,8 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
       <AisLayersToggleMapControl
         position="top-right"
         onClick={toggleAisLayer}
-        status={trackLayerVisibility}
+        track={trackLayerVisibility}
+        point={pointLayerVisibility}
       />
       <PanelMapControl
         {...{
