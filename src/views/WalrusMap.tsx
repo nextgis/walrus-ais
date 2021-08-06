@@ -187,11 +187,22 @@ export function WalrusMap<Props extends WalrusMapProps = WalrusMapProps>(
     [ngwMap],
   );
 
+  // toggle layers visibility
   useEffect(() => {
     if (ngwMap) {
-      ngwMap.toggleLayer(AIS_TRACK_LAYER_ID, trackLayerVisibility);
-      ngwMap.toggleLayer(AIS_LAYER_ID, pointLayerVisibility);
-      ngwMap.toggleLayer(WALRUS_LAYER_ID, walrusLayerVisibility);
+      const layerStatuses: [string, boolean][] = [
+        [AIS_TRACK_LAYER_ID, trackLayerVisibility],
+        [AIS_LAYER_ID, pointLayerVisibility],
+        [AIS_LAYER_ID, walrusLayerVisibility],
+      ];
+      const hiddenLayers: string[] = [];
+      for (const s of layerStatuses) {
+        ngwMap.toggleLayer(...s);
+        if (!s[1]) {
+          hiddenLayers.push(s[0]);
+        }
+      }
+      closePopups(ngwMap, hiddenLayers);
     }
   }, [
     ngwMap,
