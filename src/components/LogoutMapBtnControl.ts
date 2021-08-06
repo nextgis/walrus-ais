@@ -3,11 +3,10 @@ import logOut from '@iconify/icons-mdi/log-out';
 
 Iconify.addIcon('mdi:log-out', logOut);
 
-import { ButtonControlOptions } from '@nextgis/webmap';
-
 import { createControlComponent } from '../NgwMap/generic';
+import type { ButtonControlOptions, ControlOptions } from '@nextgis/webmap';
 
-export type LogoutMapBtnControlProps = ButtonControlOptions;
+export type LogoutMapBtnControlProps = ButtonControlOptions & ControlOptions;
 
 export const LogoutMapBtnControl = createControlComponent<
   any,
