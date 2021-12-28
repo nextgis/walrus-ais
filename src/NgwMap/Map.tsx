@@ -93,9 +93,12 @@ export function MapContainer<
   ) : (
     placeholder ?? null
   );
-
+  const p = { ...props };
+  if (!p.id) {
+    p.id = 'map';
+  }
   return (
-    <div id="map" {...props} ref={mapRef}>
+    <div {...p} ref={mapRef}>
       {contents}
     </div>
   );

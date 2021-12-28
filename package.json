@@ -33,7 +33,7 @@
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.ts{,x}",
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
-    "docker": "docker build -t registry.nextgis.com/walrus-ais-front:latest -f docker/Dockerfile . && docker push registry.nextgis.com/walrus-ais-front:latest"
+    "docker": "docmypkg -r registry.nextgis.com -n walrus-ais-front -d docker/Dockerfile -l"
   },
   "browserslist": {
     "production": [
@@ -47,13 +47,14 @@
       "last 1 safari version"
     ]
   },
+  "license": "ISC",
   "devDependencies": {
     "@iconify/react": "^1.1.4",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "node-sass": "^5.0.0",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "sass": "^1.45.1"
   }
 }
